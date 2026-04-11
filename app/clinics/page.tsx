@@ -22,11 +22,11 @@ export default async function ClinicsPage() {
   return (
     <div className="mx-auto max-w-6xl space-y-6 px-4 py-10 sm:px-6">
       <div>
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
           Care
         </p>
         <h1 className="mt-2 text-3xl font-semibold tracking-tight">Clinics</h1>
-        <p className="mt-2 max-w-2xl text-sm text-zinc-600 dark:text-zinc-400">
+        <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
           Clinics publish structured listings with hours, languages, and wait
           signals in metadata.
         </p>

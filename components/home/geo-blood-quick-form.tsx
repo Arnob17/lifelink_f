@@ -29,12 +29,12 @@ export function GeoBloodQuickForm() {
   }, []);
 
   return (
-    <div className="rounded-3xl border border-[var(--bangla-green)]/25 bg-[var(--newsprint)]/95 p-6 shadow-lg backdrop-blur dark:border-emerald-900/50 dark:bg-zinc-950/85">
-      <p className="text-sm font-semibold text-zinc-900 dark:text-zinc-50">দ্রুত রক্ত খোঁজ</p>
-      <p className="mt-1 text-xs leading-relaxed text-zinc-600 dark:text-zinc-400">{geoNote}</p>
+    <div className="rounded-2xl border border-border/70 bg-[color-mix(in_oklab,var(--background)_90%,var(--foreground))] p-6 shadow-md backdrop-blur-sm">
+      <p className="text-sm font-semibold text-foreground">দ্রুত রক্ত খোঁজ</p>
+      <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{geoNote}</p>
       <form className="mt-4 space-y-3" action="/blood" method="get">
         <div>
-          <label className="text-xs font-medium text-zinc-600 dark:text-zinc-400">রক্তের গ্রুপ</label>
+          <label className="text-xs font-medium text-muted-foreground">রক্তের গ্রুপ</label>
           <Input name="bloodGroup" placeholder="যেমন O+" className="mt-1" />
         </div>
         <input type="hidden" name="lat" value={lat} />
@@ -43,7 +43,7 @@ export function GeoBloodQuickForm() {
           কাছাকাছি খুঁজুন
         </Button>
       </form>
-      <p className="mt-3 text-center text-xs text-zinc-500">
+      <p className="mt-3 text-center text-xs text-muted-foreground">
         <Link href="/blood" className="font-medium text-[var(--bangla-red)] underline-offset-2 hover:underline">
           বিস্তারিত রক্ত ডেস্ক
         </Link>

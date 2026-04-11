@@ -29,7 +29,7 @@ export function ListingCard({
     <Link
       href={`/listings/${listing.id}`}
       className={cn(
-        "group flex flex-col rounded-2xl border border-zinc-200/80 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-zinc-800 dark:bg-zinc-950",
+        "group flex flex-col rounded-2xl border border-border bg-card p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md",
         className,
       )}
     >
@@ -52,18 +52,18 @@ export function ListingCard({
             </span>
           )}
         </div>
-        <ArrowUpRight className="h-4 w-4 text-zinc-400 transition group-hover:text-zinc-900 dark:group-hover:text-white" />
+        <ArrowUpRight className="h-4 w-4 text-muted-foreground transition group-hover:text-foreground" />
       </div>
-      <h3 className="mt-3 line-clamp-2 text-lg font-semibold tracking-tight text-zinc-900 dark:text-zinc-50">
+      <h3 className="mt-3 line-clamp-2 text-lg font-semibold tracking-tight text-card-foreground">
         {listing.title}
       </h3>
-      <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+      <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-muted-foreground">
         {listing.description}
       </p>
-      <div className="mt-4 flex flex-wrap items-center gap-2 text-xs text-zinc-500">
+      <div className="mt-4 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
         {listing.address && <span className="line-clamp-1">{listing.address}</span>}
         {listing.distanceKm != null && (
-          <span className="rounded-full bg-zinc-100 px-2 py-0.5 font-medium text-zinc-700 dark:bg-zinc-900 dark:text-zinc-200">
+          <span className="rounded-full bg-muted px-2 py-0.5 font-medium text-foreground">
             {listing.distanceKm} km
           </span>
         )}

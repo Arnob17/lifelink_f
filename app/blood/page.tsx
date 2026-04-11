@@ -42,14 +42,14 @@ export default async function BloodPage({
 
   return (
     <div className="mx-auto max-w-6xl space-y-10 px-4 py-10 sm:px-6">
-      <div className="rounded-3xl border border-red-100 bg-gradient-to-br from-red-50 to-white p-8 shadow-sm dark:border-red-900/40 dark:from-red-950/40 dark:to-zinc-950">
+      <div className="rounded-2xl border border-[var(--bangla-red)]/25 bg-gradient-to-br from-card to-muted/50 p-8 shadow-sm dark:border-[var(--bangla-red)]/35 dark:from-card dark:to-muted/30">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-red-700 dark:text-red-300">
           Emergency pathway
         </p>
-        <h1 className="mt-3 text-3xl font-semibold tracking-tight text-zinc-950 dark:text-white">
+        <h1 className="mt-3 text-3xl font-semibold tracking-tight text-foreground">
           Find blood now
         </h1>
-        <p className="mt-2 max-w-2xl text-sm text-zinc-700 dark:text-zinc-300">
+        <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
           Radius search across donor registrations and blood bank listings. Use
           the homepage hero or pass query parameters to tune coordinates.
         </p>
@@ -69,14 +69,14 @@ export default async function BloodPage({
 
       <section>
         <h2 className="text-xl font-semibold">Matching donors</h2>
-        <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+        <p className="mt-1 text-sm text-muted-foreground">
           {bloodGroup
             ? `Filtered to ${bloodGroup.toUpperCase()} near your coordinates.`
             : "All donor types within the selected radius."}
         </p>
         <div className="mt-4 grid gap-4 md:grid-cols-2">
           {donors.length === 0 && (
-            <p className="text-sm text-zinc-500">
+            <p className="text-sm text-muted-foreground">
               No donors in range — widen the radius or start the seeded API.
             </p>
           )}
@@ -90,7 +90,7 @@ export default async function BloodPage({
         <h2 className="text-xl font-semibold">Blood banks</h2>
         <div className="mt-4 grid gap-4 md:grid-cols-2">
           {banks.length === 0 && (
-            <p className="text-sm text-zinc-500">No banks in range.</p>
+            <p className="text-sm text-muted-foreground">No banks in range.</p>
           )}
           {banks.map((b) => (
             <ListingCard key={b.id} listing={b} />

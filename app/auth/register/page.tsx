@@ -51,17 +51,17 @@ export default function RegisterPage() {
     <div className="mx-auto flex max-w-md flex-col gap-6 px-4 py-16 sm:px-6">
       <div>
         <h1 className="text-2xl font-semibold tracking-tight">Create account</h1>
-        <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+        <p className="mt-2 text-sm text-muted-foreground">
           Choose a normal user account to search and register as a donor, or a
           business account to publish listings.
         </p>
       </div>
       <form
         onSubmit={onSubmit}
-        className="space-y-4 rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-950"
+        className="space-y-4 rounded-2xl border border-border bg-card p-6 shadow-sm"
       >
         <div>
-          <label className="text-xs font-medium text-zinc-600">Full name</label>
+          <label className="text-xs font-medium text-muted-foreground">Full name</label>
           <Input
             className="mt-1"
             value={name}
@@ -70,7 +70,7 @@ export default function RegisterPage() {
           />
         </div>
         <div>
-          <label className="text-xs font-medium text-zinc-600">Email</label>
+          <label className="text-xs font-medium text-muted-foreground">Email</label>
           <Input
             className="mt-1"
             type="email"
@@ -80,7 +80,7 @@ export default function RegisterPage() {
           />
         </div>
         <div>
-          <label className="text-xs font-medium text-zinc-600">Phone (optional)</label>
+          <label className="text-xs font-medium text-muted-foreground">Phone (optional)</label>
           <Input
             className="mt-1"
             value={phone}
@@ -88,7 +88,7 @@ export default function RegisterPage() {
           />
         </div>
         <div>
-          <label className="text-xs font-medium text-zinc-600">Password</label>
+          <label className="text-xs font-medium text-muted-foreground">Password</label>
           <Input
             className="mt-1"
             type="password"
@@ -99,9 +99,9 @@ export default function RegisterPage() {
           />
         </div>
         <div>
-          <label className="text-xs font-medium text-zinc-600">Account type</label>
+          <label className="text-xs font-medium text-muted-foreground">Account type</label>
           <select
-            className="mt-1 flex h-10 w-full rounded-xl border border-zinc-200 bg-white px-3 text-sm shadow-sm dark:border-zinc-800 dark:bg-zinc-950"
+            className="mt-1 flex h-10 w-full rounded-xl border border-border bg-card px-3 text-sm text-card-foreground shadow-sm"
             value={role}
             onChange={(e) => setRole(e.target.value as UserRole)}
           >
@@ -114,9 +114,9 @@ export default function RegisterPage() {
           {loading ? "Creating…" : "Create account"}
         </Button>
       </form>
-      <p className="text-center text-sm text-zinc-600">
+      <p className="text-center text-sm text-muted-foreground">
         Already have access?{" "}
-        <Link href="/auth/login" className="font-semibold text-[var(--secondary-strong)]">
+        <Link href="/auth/login" className="font-semibold text-[var(--secondary-strong)] dark:text-[var(--secondary)]">
           Sign in
         </Link>
       </p>

@@ -1,37 +1,110 @@
 @import "tailwindcss";
 @import "leaflet/dist/leaflet.css";
 
+/* Class-based dark (toggle). Never use prefers-color-scheme alone — it fought user “light”. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --background: #faf7f0;
-  --foreground: #0a0a0a;
-  --primary: #da291c;
-  --primary-strong: #b91c1c;
-  --secondary: #2563eb;
-  --secondary-strong: #1d4ed8;
-  --bangla-green: #006a4e;
-  --bangla-green-strong: #004832;
-  --bangla-red: #da291c;
-  --newsprint: #faf6ee;
+  /* Light: one continuous “paper” field — header/main/hero share --background; cards use a hair-lift only */
+  --background: #f2ebe0;
+  --foreground: #242428;
+  --card: color-mix(in oklab, var(--background) 94%, var(--foreground));
+  --card-foreground: #242428;
+  --muted: color-mix(in oklab, var(--background) 88%, var(--foreground));
+  --muted-foreground: #5c564c;
+  --border: #cfc3b0;
+  --ring: #4f6f64;
+  --header-surface: var(--background);
+  --newsprint: var(--background);
+  --primary: #9a4d3c;
+  --primary-strong: #7a3d30;
+  --secondary: #4f6f64;
+  --secondary-strong: #3d5a50;
+  /* Legacy names = same palette (components still reference these) */
+  --bangla-green: #4f6f64;
+  --bangla-green-strong: #2f4540;
+  --bangla-red: #a65d48;
+  --accent-gold: #b8975c;
+  --accent-ink: #242428;
+}
+
+html.dark {
+  /* Dark: inkstone & lamp light — not OLED black */
+  --background: #222128;
+  --foreground: #ebe6dc;
+  --card: color-mix(in oklab, var(--background) 92%, var(--foreground));
+  --card-foreground: #ebe6dc;
+  --muted: color-mix(in oklab, var(--background) 78%, var(--foreground));
+  --muted-foreground: #b4aa9c;
+  --border: #4a4754;
+  --ring: #7a9e8f;
+  --header-surface: var(--background);
+  --newsprint: var(--background);
+  --primary: #c87862;
+  --primary-strong: #e09a86;
+  --secondary: #8fb0a3;
+  --secondary-strong: #b5d4c6;
+  --bangla-green: #8fb0a3;
+  --bangla-green-strong: #b8d4c9;
+  --bangla-red: #c87862;
+  --accent-gold: #d4bc7a;
+  --accent-ink: #ebe6dc;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
   --font-sans: var(--font-noto-bengali), var(--font-geist-sans), system-ui, sans-serif;
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #050505;
-    --foreground: #fafafa;
-  }
+/* Page canvas lives on <html> so body utilities cannot “erase” the paper tone */
+html {
+  min-height: 100%;
+  background-color: var(--background);
+  color: var(--foreground);
+  color-scheme: light;
+  /* Large soft washes — low contrast so they never read as a horizontal “step” */
+  background-image: radial-gradient(
+    140vw 70vh at 50% -15%,
+    color-mix(in oklab, var(--bangla-green) 5%, transparent),
+    transparent 60%
+  ),
+    radial-gradient(120vw 65vh at 50% 115%, color-mix(in oklab, var(--bangla-red) 4%, transparent), transparent 55%);
+}
+
+html.dark {
+  color-scheme: dark;
+  background-image: radial-gradient(
+    140vw 70vh at 50% -15%,
+    color-mix(in oklab, var(--bangla-green) 8%, transparent),
+    transparent 58%
+  ),
+    radial-gradient(120vw 65vh at 50% 115%, color-mix(in oklab, var(--bangla-red) 6%, transparent), transparent 52%);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  min-height: 100%;
+  margin: 0;
+  background-color: transparent;
+  color: inherit;
   font-family: var(--font-noto-bengali), var(--font-geist-sans), system-ui, sans-serif;
+}
+
+/* One continuous field behind routed content */
+main {
+  background-color: transparent;
+}
+
+/* Tiro Bangla via next/font variable on <html> — class only (no next/font className on nodes) for stable hydration */
+.font-tiro-bangla {
+  font-family: var(--font-tiro-bangla), var(--font-noto-bengali), ui-serif, serif;
 }
 
 a {

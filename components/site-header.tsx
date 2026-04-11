@@ -7,6 +7,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/components/providers/auth-context";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 const nav = [
   { href: "/news", label: "সংবাদ", hint: "News" },
@@ -23,32 +24,35 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-zinc-200/80 bg-white/80 backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-950/80">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-        <Link href="/" className="flex items-center gap-2 font-semibold tracking-tight">
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[var(--bangla-green)] text-white shadow-sm ring-2 ring-[var(--bangla-red)]/30">
+    <header className="sticky top-0 z-50 border-b border-border/60 bg-background/90 shadow-sm backdrop-blur-md supports-[backdrop-filter]:bg-background/75">
+      <div className="mx-auto flex h-[3.65rem] max-w-6xl items-center justify-between px-4 sm:px-6">
+        <Link href="/" className="flex items-center gap-2.5 font-semibold tracking-tight">
+          <span className="flex h-10 w-10 items-center justify-center rounded-sm border border-[color-mix(in_oklab,var(--accent-ink)_18%,var(--border))] bg-card text-[var(--bangla-green-strong)] shadow-[inset_0_1px_0_0_color-mix(in_oklab,white_35%,transparent)] dark:text-[var(--bangla-green)]">
             <HeartPulse className="h-5 w-5" />
           </span>
-          <span className="flex flex-col leading-none">
-            <span className="text-lg text-[var(--bangla-green-strong)] dark:text-emerald-300">
+          <span suppressHydrationWarning className="flex flex-col leading-tight">
+            <span className="font-tiro-bangla text-[1.12rem] font-semibold tracking-tight text-[var(--accent-ink)]">
               লাইফলিংক
             </span>
-            <span className="text-[10px] font-medium uppercase tracking-wide text-zinc-500">LifeLink</span>
+            <span className="text-[10px] font-medium tracking-[0.12em] text-muted-foreground">
+              সংবাদ · মানচিত্র · মিলন
+            </span>
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-1 md:flex">
+        <nav className="hidden items-center gap-0.5 md:flex">
           {nav.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               className={cn(
-                "rounded-lg px-3 py-2 text-sm font-medium text-zinc-600 transition hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-white",
-                pathname === item.href && "bg-zinc-100 text-zinc-900 dark:bg-zinc-900 dark:text-white",
+                "rounded-md px-2.5 py-2 text-sm font-semibold text-muted-foreground transition hover:bg-muted hover:text-foreground",
+                pathname === item.href &&
+                "bg-card text-foreground shadow-sm ring-1 ring-border/70",
               )}
             >
               <span className="block leading-tight">{item.label}</span>
-              <span className="block text-[10px] font-normal uppercase tracking-wide text-zinc-400">
+              <span className="block text-[9px] font-medium uppercase tracking-wide text-muted-foreground/80">
                 {item.hint}
               </span>
             </Link>
@@ -56,14 +60,15 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden items-center gap-2 md:flex">
-          <Button variant="outline" size="sm" className="border-[var(--bangla-red)]/40 text-[var(--bangla-red)]" asChild>
+          <ThemeToggle />
+          <Button variant="outline" size="sm" className="border-[var(--bangla-red)]/45 text-[var(--bangla-red)]" asChild>
             <Link href="/blood">রক্ত খুঁজুন</Link>
           </Button>
           {user ? (
             <>
               {user.role === "BUSINESS" && (
                 <Button variant="secondary" size="sm" asChild>
-                  <Link href="/dashboard/listings">Dashboard</Link>
+                  <Link href="/dashboard/listings">বিজ্ঞাপন ড্যাশবোর্ড</Link>
                 </Button>
               )}
               <Button variant="ghost" size="sm" onClick={logout}>
@@ -82,34 +87,37 @@ export function SiteHeader() {
           )}
         </div>
 
-        <button
-          type="button"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-zinc-200 md:hidden dark:border-zinc-800"
-          aria-label="Menu"
-          onClick={() => setOpen((v) => !v)}
-        >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
+          <button
+            type="button"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-border bg-card text-foreground shadow-sm"
+            aria-label="Menu"
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </div>
 
       {open && (
-        <div className="border-t border-zinc-200 bg-white px-4 py-4 md:hidden dark:border-zinc-800 dark:bg-zinc-950">
-          <div className="flex flex-col gap-2">
+        <div className="border-t border-border bg-card px-4 py-4 md:hidden">
+          <div className="flex flex-col gap-1">
             {nav.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="rounded-lg px-3 py-2 text-sm font-medium text-zinc-700 dark:text-zinc-200"
+                className="rounded-md px-3 py-2 text-sm font-semibold text-foreground"
               >
                 <span>{item.label}</span>
-                <span className="ml-2 text-[10px] uppercase text-zinc-400">{item.hint}</span>
+                <span className="ml-2 text-[10px] font-medium uppercase text-muted-foreground">{item.hint}</span>
               </Link>
             ))}
             <Link
               href="/blood"
               onClick={() => setOpen(false)}
-              className="rounded-lg px-3 py-2 text-sm font-semibold text-[var(--bangla-red)]"
+              className="rounded-md px-3 py-2 text-sm font-semibold text-[var(--bangla-red)]"
             >
               রক্ত খুঁজুন
             </Link>
@@ -119,14 +127,14 @@ export function SiteHeader() {
                   <Link
                     href="/dashboard/listings"
                     onClick={() => setOpen(false)}
-                    className="rounded-lg px-3 py-2 text-sm"
+                    className="rounded-md px-3 py-2 text-sm font-medium"
                   >
-                    Dashboard
+                    বিজ্ঞাপন ড্যাশবোর্ড
                   </Link>
                 )}
                 <button
                   type="button"
-                  className="rounded-lg px-3 py-2 text-left text-sm"
+                  className="rounded-md px-3 py-2 text-left text-sm"
                   onClick={() => {
                     logout();
                     setOpen(false);
@@ -140,14 +148,14 @@ export function SiteHeader() {
                 <Link
                   href="/auth/login"
                   onClick={() => setOpen(false)}
-                  className="rounded-lg px-3 py-2 text-sm"
+                  className="rounded-md px-3 py-2 text-sm"
                 >
                   Sign in
                 </Link>
                 <Link
                   href="/auth/register"
                   onClick={() => setOpen(false)}
-                  className="rounded-lg px-3 py-2 text-sm font-semibold"
+                  className="rounded-md px-3 py-2 text-sm font-semibold"
                 >
                   Create account
                 </Link>

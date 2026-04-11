@@ -58,7 +58,7 @@ export function LocationMapPreview({ initialMarkers = [] }: { initialMarkers?: M
 
   return (
     <div className="space-y-2">
-      <p className="text-xs leading-relaxed text-zinc-600 dark:text-zinc-400">{caption}</p>
+      <p className="text-xs leading-relaxed text-muted-foreground">{caption}</p>
       <MapPreview lat={lat} lng={lng} markers={markers} />
     </div>
   );

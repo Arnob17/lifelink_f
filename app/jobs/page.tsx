@@ -22,11 +22,11 @@ export default async function JobsPage() {
   return (
     <div className="mx-auto max-w-6xl space-y-6 px-4 py-10 sm:px-6">
       <div>
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
           Work
         </p>
         <h1 className="mt-2 text-3xl font-semibold tracking-tight">Jobs</h1>
-        <p className="mt-2 max-w-2xl text-sm text-zinc-600 dark:text-zinc-400">
+        <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
           Structured listings with salary ranges and requirements stored in
           flexible metadata.
         </p>

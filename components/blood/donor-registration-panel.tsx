@@ -18,8 +18,8 @@ export function DonorRegistrationPanel() {
 
   if (!user || user.role !== "USER") {
     return (
-      <div className="rounded-2xl border border-zinc-200 bg-white p-6 text-sm text-zinc-600 shadow-sm dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-300">
-        <p className="font-semibold text-zinc-900 dark:text-white">
+      <div className="rounded-2xl border border-border bg-card p-6 text-sm text-muted-foreground shadow-sm">
+        <p className="font-semibold text-foreground">
           Become a donor on LifeLink
         </p>
         <p className="mt-2">
@@ -58,19 +58,19 @@ export function DonorRegistrationPanel() {
   return (
     <form
       onSubmit={onSubmit}
-      className="grid gap-4 rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-950 md:grid-cols-2"
+      className="grid gap-4 rounded-2xl border border-border bg-card p-6 shadow-sm md:grid-cols-2"
     >
       <div className="md:col-span-2">
-        <p className="text-sm font-semibold text-zinc-900 dark:text-white">
+        <p className="text-sm font-semibold text-foreground">
           Donor registration
         </p>
-        <p className="text-xs text-zinc-500">
+        <p className="text-xs text-muted-foreground">
           Creates or updates your BLOOD_DONOR listing. You control availability in
           metadata.
         </p>
       </div>
       <div>
-        <label className="text-xs font-medium text-zinc-600">Blood group</label>
+        <label className="text-xs font-medium text-muted-foreground">Blood group</label>
         <Input
           className="mt-1"
           value={bloodGroup}
@@ -79,7 +79,7 @@ export function DonorRegistrationPanel() {
         />
       </div>
       <div>
-        <label className="text-xs font-medium text-zinc-600">Address</label>
+        <label className="text-xs font-medium text-muted-foreground">Address</label>
         <Input
           className="mt-1"
           value={address}
@@ -88,11 +88,11 @@ export function DonorRegistrationPanel() {
         />
       </div>
       <div>
-        <label className="text-xs font-medium text-zinc-600">Latitude</label>
+        <label className="text-xs font-medium text-muted-foreground">Latitude</label>
         <Input className="mt-1" value={lat} onChange={(e) => setLat(e.target.value)} />
       </div>
       <div>
-        <label className="text-xs font-medium text-zinc-600">Longitude</label>
+        <label className="text-xs font-medium text-muted-foreground">Longitude</label>
         <Input className="mt-1" value={lng} onChange={(e) => setLng(e.target.value)} />
       </div>
       <div className="md:col-span-2 flex flex-col gap-2">

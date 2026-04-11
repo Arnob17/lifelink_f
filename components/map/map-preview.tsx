@@ -28,7 +28,7 @@ export function MapPreview({
   }>;
 }) {
   return (
-    <div className="overflow-hidden rounded-2xl border border-zinc-200 shadow-sm dark:border-zinc-800">
+    <div className="overflow-hidden rounded-2xl border border-border shadow-sm">
       <MapView lat={lat} lng={lng} zoom={12} markers={markers} height={320} />
     </div>
   );

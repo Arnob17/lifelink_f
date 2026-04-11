@@ -17,14 +17,14 @@ export function ExternalNewsCard({
       target="_blank"
       rel="noopener noreferrer"
       className={cn(
-        "group flex overflow-hidden rounded-2xl border border-zinc-200/90 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-zinc-800 dark:bg-zinc-950",
+        "group flex overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition hover:-translate-y-0.5 hover:shadow-md",
         featured ? "flex-col sm:flex-row" : "flex-col",
         className,
       )}
     >
       <div
         className={cn(
-          "relative shrink-0 overflow-hidden bg-zinc-100 dark:bg-zinc-900",
+          "relative shrink-0 overflow-hidden bg-muted",
           featured ? "aspect-[16/10] w-full sm:aspect-auto sm:h-auto sm:w-[46%]" : "aspect-[16/10] w-full",
         )}
       >
@@ -50,15 +50,15 @@ export function ExternalNewsCard({
         <div className="flex items-start justify-between gap-2">
           <h3
             className={cn(
-              "font-semibold leading-snug tracking-tight text-zinc-900 dark:text-zinc-50",
+              "font-semibold leading-snug tracking-tight text-card-foreground",
               featured ? "text-lg sm:text-xl" : "text-base",
             )}
           >
             {item.title}
           </h3>
-          <ExternalLink className="mt-1 h-4 w-4 shrink-0 text-zinc-400 transition group-hover:text-[var(--bangla-red)]" />
+          <ExternalLink className="mt-1 h-4 w-4 shrink-0 text-muted-foreground transition group-hover:text-[var(--bangla-red)]" />
         </div>
-        <p className="mt-2 text-xs text-zinc-500">
+        <p className="mt-2 text-xs text-muted-foreground">
           মূল প্রতিবেদন খুলতে ক্লিক করুন — আমরা শুধু সংযোগ দেখাচ্ছি, বিষয়বস্তু সেই সংস্থার।
         </p>
       </div>

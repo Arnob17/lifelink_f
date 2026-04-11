@@ -101,10 +101,10 @@ export function MapView({
             >
               <Popup>
                 <div className="min-w-[180px]">
-                  <p className="text-xs font-semibold uppercase text-zinc-500">
+                  <p className="text-xs font-semibold uppercase text-muted-foreground">
                     {m.type.replaceAll("_", " ")}
                   </p>
-                  <p className="mt-1 text-sm font-semibold text-zinc-900">
+                  <p className="mt-1 text-sm font-semibold text-foreground">
                     {m.title}
                   </p>
                   <Link

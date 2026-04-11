@@ -2,17 +2,17 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const badgeVariants = cva(
-  "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+  "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background",
   {
     variants: {
       variant: {
         default:
-          "border-transparent bg-zinc-900 text-zinc-50 dark:bg-zinc-50 dark:text-zinc-900",
+          "border-border bg-muted text-foreground",
         secondary:
-          "border-transparent bg-[var(--secondary)]/15 text-[var(--secondary-strong)]",
+          "border-transparent bg-[color-mix(in_oklab,var(--secondary)_18%,transparent)] text-[var(--secondary-strong)] dark:text-[var(--secondary)]",
         destructive:
-          "border-transparent bg-[var(--primary)]/10 text-[var(--primary-strong)]",
-        outline: "text-zinc-700 dark:text-zinc-200",
+          "border-transparent bg-[color-mix(in_oklab,var(--primary)_14%,transparent)] text-[var(--primary-strong)] dark:text-[var(--primary)]",
+        outline: "border-border text-muted-foreground",
       },
     },
     defaultVariants: {

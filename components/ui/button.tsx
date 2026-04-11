@@ -13,9 +13,9 @@ const buttonVariants = cva(
         secondary:
           "bg-[var(--secondary)] text-white shadow-sm hover:bg-[var(--secondary-strong)] focus-visible:ring-[var(--secondary)]",
         outline:
-          "border border-zinc-200 bg-white text-zinc-900 shadow-sm hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-50 dark:hover:bg-zinc-900",
-        ghost: "hover:bg-zinc-100 dark:hover:bg-zinc-900",
-        link: "text-[var(--secondary)] underline-offset-4 hover:underline",
+          "border border-border bg-card text-card-foreground shadow-sm hover:bg-muted/80",
+        ghost: "hover:bg-muted/70",
+        link: "text-[var(--secondary-strong)] underline-offset-4 hover:underline dark:text-[var(--secondary)]",
       },
       size: {
         default: "h-10 px-4 py-2",

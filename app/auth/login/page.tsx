@@ -42,13 +42,13 @@ export default function LoginPage() {
     <div className="mx-auto flex max-w-md flex-col gap-6 px-4 py-16 sm:px-6">
       <div>
         <h1 className="text-2xl font-semibold tracking-tight">Sign in</h1>
-        <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+        <p className="mt-2 text-sm text-muted-foreground">
           Use seeded demo accounts after running the API seed script.
         </p>
       </div>
-      <form onSubmit={onSubmit} className="space-y-4 rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-950">
+      <form onSubmit={onSubmit} className="space-y-4 rounded-2xl border border-border bg-card p-6 shadow-sm">
         <div>
-          <label className="text-xs font-medium text-zinc-600">Email</label>
+          <label className="text-xs font-medium text-muted-foreground">Email</label>
           <Input
             className="mt-1"
             type="email"
@@ -59,7 +59,7 @@ export default function LoginPage() {
           />
         </div>
         <div>
-          <label className="text-xs font-medium text-zinc-600">Password</label>
+          <label className="text-xs font-medium text-muted-foreground">Password</label>
           <Input
             className="mt-1"
             type="password"
@@ -74,9 +74,9 @@ export default function LoginPage() {
           {loading ? "Signing in…" : "Continue"}
         </Button>
       </form>
-      <p className="text-center text-sm text-zinc-600">
+      <p className="text-center text-sm text-muted-foreground">
         New to LifeLink?{" "}
-        <Link href="/auth/register" className="font-semibold text-[var(--secondary-strong)]">
+        <Link href="/auth/register" className="font-semibold text-[var(--secondary-strong)] dark:text-[var(--secondary)]">
           Create an account
         </Link>
       </p>

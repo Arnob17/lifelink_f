@@ -50,17 +50,17 @@ export function FutureAiPanel() {
   }, [urgency]);
 
   return (
-    <section className="rounded-3xl border border-dashed border-zinc-300 bg-gradient-to-br from-zinc-50 to-white p-8 dark:border-zinc-700 dark:from-zinc-950 dark:to-zinc-900">
+    <section className="rounded-2xl border border-dashed border-border bg-gradient-to-br from-muted/50 to-card p-8">
       <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
         <div>
           <Badge variant="secondary" className="gap-1">
             <Sparkles className="h-3.5 w-3.5" />
             Future AI feature
           </Badge>
-          <h2 className="mt-3 text-2xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50">
+          <h2 className="mt-3 text-2xl font-semibold tracking-tight text-foreground">
             Nearest and fastest-available donors
           </h2>
-          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
             Preview ranking blends distance, donor availability, and clinical
             urgency. This is a transparent heuristic — not a medical device —
             intended to guide coordinators toward better first calls.
@@ -80,8 +80,8 @@ export function FutureAiPanel() {
         </div>
       </div>
 
-      <div className="mt-6 rounded-2xl border border-zinc-200 bg-white p-4 text-sm shadow-sm dark:border-zinc-800 dark:bg-zinc-950">
-        {loading && <p className="text-zinc-500">Loading ranking preview…</p>}
+      <div className="mt-6 rounded-2xl border border-border bg-card p-4 text-sm shadow-sm">
+        {loading && <p className="text-muted-foreground">Loading ranking preview…</p>}
         {error && <p className="text-red-600">{error}</p>}
         {data && (
           <>
@@ -89,16 +89,16 @@ export function FutureAiPanel() {
               {data.suggestions.slice(0, 5).map((s, idx) => (
                 <li
                   key={s.listingId}
-                  className="flex items-start justify-between gap-4 rounded-xl bg-zinc-50 px-3 py-2 dark:bg-zinc-900"
+                  className="flex items-start justify-between gap-4 rounded-xl bg-muted/60 px-3 py-2"
                 >
                   <div>
-                    <p className="text-xs font-semibold text-zinc-500">
+                    <p className="text-xs font-semibold text-muted-foreground">
                       #{idx + 1} · {s.distanceKm} km · score {s.score}
                     </p>
-                    <p className="font-medium text-zinc-900 dark:text-zinc-50">
+                    <p className="font-medium text-foreground">
                       {s.title}
                     </p>
-                    <p className="text-xs text-zinc-500">{s.reason}</p>
+                    <p className="text-xs text-muted-foreground">{s.reason}</p>
                   </div>
                   <span
                     className={
@@ -112,7 +112,7 @@ export function FutureAiPanel() {
                 </li>
               ))}
             </ol>
-            <p className="mt-4 text-xs text-zinc-500">{data.disclaimer}</p>
+            <p className="mt-4 text-xs text-muted-foreground">{data.disclaimer}</p>
           </>
         )}
       </div>

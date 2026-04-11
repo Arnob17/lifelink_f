@@ -78,7 +78,7 @@ export default function BusinessListingsPage() {
 
   if (!user || user.role !== "BUSINESS") {
     return (
-      <div className="mx-auto max-w-lg px-4 py-16 text-center text-sm text-zinc-600">
+      <div className="mx-auto max-w-lg px-4 py-16 text-center text-sm text-muted-foreground">
         <p>This workspace is reserved for business accounts.</p>
         <Button asChild className="mt-4">
           <Link href="/auth/register">Create business account</Link>
@@ -90,11 +90,11 @@ export default function BusinessListingsPage() {
   return (
     <div className="mx-auto max-w-5xl space-y-10 px-4 py-10 sm:px-6">
       <div>
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
           Business
         </p>
         <h1 className="mt-2 text-3xl font-semibold tracking-tight">Your listings</h1>
-        <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+        <p className="mt-2 text-sm text-muted-foreground">
           Publish any supported service type from a single dashboard — no
           separate portals.
         </p>
@@ -102,15 +102,15 @@ export default function BusinessListingsPage() {
 
       <form
         onSubmit={onCreate}
-        className="grid gap-4 rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-950 md:grid-cols-2"
+        className="grid gap-4 rounded-2xl border border-border bg-card p-6 shadow-sm md:grid-cols-2"
       >
         <div className="md:col-span-2">
           <p className="text-sm font-semibold">Create listing</p>
         </div>
         <div>
-          <label className="text-xs font-medium text-zinc-600">Type</label>
+          <label className="text-xs font-medium text-muted-foreground">Type</label>
           <select
-            className="mt-1 flex h-10 w-full rounded-xl border border-zinc-200 bg-white px-3 text-sm dark:border-zinc-800 dark:bg-zinc-950"
+            className="mt-1 flex h-10 w-full rounded-xl border border-border bg-card px-3 text-sm text-card-foreground"
             value={type}
             onChange={(e) => setType(e.target.value as ListingType)}
           >
@@ -122,28 +122,28 @@ export default function BusinessListingsPage() {
           </select>
         </div>
         <div>
-          <label className="text-xs font-medium text-zinc-600">Title</label>
+          <label className="text-xs font-medium text-muted-foreground">Title</label>
           <Input className="mt-1" value={title} onChange={(e) => setTitle(e.target.value)} required />
         </div>
         <div className="md:col-span-2">
-          <label className="text-xs font-medium text-zinc-600">Description</label>
+          <label className="text-xs font-medium text-muted-foreground">Description</label>
           <textarea
-            className="mt-1 min-h-[100px] w-full rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm shadow-sm dark:border-zinc-800 dark:bg-zinc-950"
+            className="mt-1 min-h-[100px] w-full rounded-xl border border-border bg-card px-3 py-2 text-sm text-card-foreground shadow-sm"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             required
           />
         </div>
         <div className="md:col-span-2">
-          <label className="text-xs font-medium text-zinc-600">Address</label>
+          <label className="text-xs font-medium text-muted-foreground">Address</label>
           <Input className="mt-1" value={address} onChange={(e) => setAddress(e.target.value)} />
         </div>
         <div>
-          <label className="text-xs font-medium text-zinc-600">Latitude</label>
+          <label className="text-xs font-medium text-muted-foreground">Latitude</label>
           <Input className="mt-1" value={latitude} onChange={(e) => setLatitude(e.target.value)} />
         </div>
         <div>
-          <label className="text-xs font-medium text-zinc-600">Longitude</label>
+          <label className="text-xs font-medium text-muted-foreground">Longitude</label>
           <Input className="mt-1" value={longitude} onChange={(e) => setLongitude(e.target.value)} />
         </div>
         {error && <p className="md:col-span-2 text-sm text-red-600">{error}</p>}
@@ -163,15 +163,15 @@ export default function BusinessListingsPage() {
         </div>
         <div className="space-y-3">
           {items.length === 0 && !loading && (
-            <p className="text-sm text-zinc-500">No listings yet.</p>
+            <p className="text-sm text-muted-foreground">No listings yet.</p>
           )}
           {items.map((l) => (
             <div
               key={l.id}
-              className="flex flex-col gap-2 rounded-xl border border-zinc-200 bg-white p-4 text-sm dark:border-zinc-800 dark:bg-zinc-950 sm:flex-row sm:items-center sm:justify-between"
+              className="flex flex-col gap-2 rounded-xl border border-border bg-card p-4 text-sm sm:flex-row sm:items-center sm:justify-between"
             >
               <div>
-                <p className="text-xs font-semibold uppercase text-zinc-500">
+                <p className="text-xs font-semibold uppercase text-muted-foreground">
                   {l.type.replaceAll("_", " ")}
                 </p>
                 <p className="font-medium">{l.title}</p>

@@ -64,8 +64,8 @@ export function MapPageClient({
 
   return (
     <div className="space-y-2">
-      <p className="text-xs text-zinc-600 dark:text-zinc-400">{note}</p>
-      <div className="overflow-hidden rounded-3xl border border-zinc-200 shadow-sm dark:border-zinc-800">
+      <p className="text-xs text-muted-foreground">{note}</p>
+      <div className="overflow-hidden rounded-3xl border border-border shadow-sm">
         <MapView lat={lat} lng={lng} zoom={12} markers={markers} height={560} />
       </div>
     </div>

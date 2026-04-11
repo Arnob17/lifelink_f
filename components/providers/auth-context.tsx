@@ -32,17 +32,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const t = localStorage.getItem(STORAGE_KEY);
-    const u = localStorage.getItem(USER_KEY);
-    if (t) setToken(t);
-    if (u) {
-      try {
-        setUser(JSON.parse(u) as AuthUser);
-      } catch {
-        localStorage.removeItem(USER_KEY);
+    queueMicrotask(() => {
+      const t = localStorage.getItem(STORAGE_KEY);
+      const u = localStorage.getItem(USER_KEY);
+      if (t) setToken(t);
+      if (u) {
+        try {
+          setUser(JSON.parse(u) as AuthUser);
+        } catch {
+          localStorage.removeItem(USER_KEY);
+        }
       }
-    }
-    setLoading(false);
+      setLoading(false);
+    });
   }, []);
 
   const setSession = useCallback((t: string, u: AuthUser) => {

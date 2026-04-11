@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button";
 import { apiBloodSearch } from "@/lib/api";
 import { DonorRegistrationPanel } from "@/components/blood/donor-registration-panel";
 
-const DEFAULT_LAT = 37.7749;
-const DEFAULT_LNG = -122.4194;
+const DEFAULT_LAT = 23.810331;
+const DEFAULT_LNG = 90.412521;
 
 type SearchParams = Record<string, string | string[] | undefined>;
 

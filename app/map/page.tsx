@@ -1,8 +1,8 @@
 import { MapPageClient } from "@/components/map/map-page-client";
 import { apiGetMarkers } from "@/lib/api";
 
-const DEMO_LAT = 37.7749;
-const DEMO_LNG = -122.4194;
+const DEMO_LAT = 23.810331;
+const DEMO_LNG = 90.412521;
 
 export default async function MapPage() {
   let markers: Awaited<ReturnType<typeof apiGetMarkers>> = [];
@@ -37,14 +37,15 @@ export default async function MapPage() {
         </div>
       )}
       <div>
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">
-          Live layer
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--bangla-green)]">
+          লাইভ মানচিত্র
         </p>
-        <h1 className="mt-2 text-3xl font-semibold tracking-tight">City map</h1>
+        <h1 className="mt-2 text-3xl font-bold tracking-tight text-zinc-950 dark:text-white">
+          শহর ও সেবার মানচিত্র
+        </h1>
         <p className="mt-2 max-w-2xl text-sm text-zinc-600 dark:text-zinc-400">
-          Markers are tinted by category: red for blood, blue for clinics, green
-          for pharmacies. Click a marker to open a compact detail card with a
-          deep link.
+          রক্ত লাল, ক্লিনিক নীল, ফার্মেসি সবুজ — মার্কারে ক্লিক করলে বিস্তারিত লিংক পাবেন।
+          ব্রাউজারে অবস্থান অনুমতি দিলে মানচিত্র আপনার আশেপাশে কেন্দ্রীভূত হবে।
         </p>
       </div>
       <MapPageClient lat={DEMO_LAT} lng={DEMO_LNG} markers={markers} />

@@ -2,18 +2,22 @@
 @import "leaflet/dist/leaflet.css";
 
 :root {
-  --background: #fafafa;
+  --background: #faf7f0;
   --foreground: #0a0a0a;
-  --primary: #e11d48;
-  --primary-strong: #be123c;
+  --primary: #da291c;
+  --primary-strong: #b91c1c;
   --secondary: #2563eb;
   --secondary-strong: #1d4ed8;
+  --bangla-green: #006a4e;
+  --bangla-green-strong: #004832;
+  --bangla-red: #da291c;
+  --newsprint: #faf6ee;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-noto-bengali), var(--font-geist-sans), system-ui, sans-serif;
   --font-mono: var(--font-geist-mono);
 }
 
@@ -27,7 +31,7 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-family: var(--font-noto-bengali), var(--font-geist-sans), system-ui, sans-serif;
 }
 
 a {
@@ -35,5 +39,5 @@ a {
 }
 
 .leaflet-container {
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-family: var(--font-noto-bengali), var(--font-geist-sans), system-ui, sans-serif;
 }

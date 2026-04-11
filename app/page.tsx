@@ -1,65 +1,157 @@
-import Image from "next/image";
+import { HeroBlood } from "@/components/home/hero-blood";
+import { SectionHeading } from "@/components/home/section-heading";
+import { FutureAiPanel } from "@/components/home/future-ai-panel";
+import { ListingCard } from "@/components/listing-card";
+import { MapPreview } from "@/components/map/map-preview";
+import { apiGetListings, apiGetMarkers } from "@/lib/api";
+import type { Listing } from "@/lib/types";
 
-export default function Home() {
+const DEMO_LAT = 37.7749;
+const DEMO_LNG = -122.4194;
+
+async function safeListings(
+  params: Record<string, string | number | undefined>,
+): Promise<Listing[]> {
+  try {
+    return await apiGetListings(params);
+  } catch {
+    return [];
+  }
+}
+
+async function safeMarkers() {
+  try {
+    return await apiGetMarkers({
+      lat: DEMO_LAT,
+      lng: DEMO_LNG,
+      radiusKm: 35,
+    });
+  } catch {
+    return [];
+  }
+}
+
+export default async function HomePage() {
+  const [news, jobs, clinics, pharmacies, teachers, markers] =
+    await Promise.all([
+      safeListings({ type: "NEWS", lat: DEMO_LAT, lng: DEMO_LNG, radiusKm: 80, take: 4 }),
+      safeListings({ type: "JOB", lat: DEMO_LAT, lng: DEMO_LNG, radiusKm: 80, take: 4 }),
+      safeListings({
+        type: "CLINIC",
+        lat: DEMO_LAT,
+        lng: DEMO_LNG,
+        radiusKm: 80,
+        take: 4,
+      }),
+      safeListings({
+        type: "PHARMACY",
+        lat: DEMO_LAT,
+        lng: DEMO_LNG,
+        radiusKm: 80,
+        take: 4,
+      }),
+      safeListings({
+        type: "TEACHER",
+        lat: DEMO_LAT,
+        lng: DEMO_LNG,
+        radiusKm: 80,
+        take: 4,
+      }),
+      safeMarkers(),
+    ]);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <div className="mx-auto max-w-6xl space-y-16 px-4 py-10 sm:px-6 lg:py-14">
+      <HeroBlood />
+
+      <section>
+        <SectionHeading
+          kicker="Front page"
+          title="Top news"
+          subtitle="Headline-style briefs from trusted civic publishers on LifeLink."
+          href="/news"
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+        <div className="grid gap-4 md:grid-cols-2">
+          {news.length === 0 && (
+            <p className="text-sm text-zinc-500">
+              Start the API and seed the database to see live headlines here.
+            </p>
+          )}
+          {news.map((item) => (
+            <ListingCard key={item.id} listing={item} />
+          ))}
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      <section>
+        <SectionHeading
+          kicker="Geo layer"
+          title="Nearby services"
+          subtitle="OpenStreetMap with Leaflet — markers colored by service type."
+          href="/map"
+          actionLabel="Open full map"
+        />
+        <MapPreview lat={DEMO_LAT} lng={DEMO_LNG} markers={markers} />
+      </section>
+
+      <section>
+        <SectionHeading
+          kicker="Work"
+          title="Jobs worth a look"
+          subtitle="Healthcare, logistics, and community roles posted by business accounts."
+          href="/jobs"
+        />
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {jobs.map((item) => (
+            <ListingCard key={item.id} listing={item} />
+          ))}
         </div>
-      </main>
+      </section>
+
+      <section className="grid gap-10 lg:grid-cols-2">
+        <div>
+          <SectionHeading
+            kicker="Care"
+            title="Clinics"
+            subtitle="Primary and urgent care listings with contact paths for patients."
+            href="/clinics"
+          />
+          <div className="grid gap-4">
+            {clinics.map((item) => (
+              <ListingCard key={item.id} listing={item} />
+            ))}
+          </div>
+        </div>
+        <div>
+          <SectionHeading
+            kicker="Care"
+            title="Pharmacies"
+            subtitle="Prescriptions, vaccines, and delivery-aware neighborhood pharmacies."
+            href="/pharmacies"
+          />
+          <div className="grid gap-4">
+            {pharmacies.map((item) => (
+              <ListingCard key={item.id} listing={item} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <SectionHeading
+          kicker="Learning"
+          title="Teachers"
+          subtitle="Subject experts and cohort instructors represented as structured listings."
+          href="/teachers"
+        />
+        <div className="grid gap-4 sm:grid-cols-2">
+          {teachers.map((item) => (
+            <ListingCard key={item.id} listing={item} />
+          ))}
+        </div>
+      </section>
+
+      <FutureAiPanel />
     </div>
   );
 }

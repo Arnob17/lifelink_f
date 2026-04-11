@@ -1,8 +1,13 @@
 @import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fafafa;
+  --foreground: #0a0a0a;
+  --primary: #e11d48;
+  --primary-strong: #be123c;
+  --secondary: #2563eb;
+  --secondary-strong: #1d4ed8;
 }
 
 @theme inline {
@@ -14,13 +19,21 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #050505;
+    --foreground: #fafafa;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+a {
+  color: inherit;
+}
+
+.leaflet-container {
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
 }

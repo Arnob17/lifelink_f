@@ -50,7 +50,7 @@ export function FutureAiPanel() {
   }, [urgency]);
 
   return (
-    <section className="rounded-2xl border border-dashed border-border bg-gradient-to-br from-muted/50 to-card p-8">
+    <section className="rounded-3xl border border-dashed border-border/80 bg-gradient-to-br from-card/80 via-muted/40 to-card p-6 shadow-md shadow-black/[0.04] backdrop-blur-md dark:shadow-black/25 sm:p-8">
       <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
         <div>
           <Badge variant="secondary" className="gap-1">

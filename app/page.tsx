@@ -68,7 +68,7 @@ export default async function HomePage() {
   ]);
 
   return (
-    <div className="mx-auto max-w-6xl space-y-12 px-4 py-10 sm:px-6 lg:space-y-14 lg:py-14">
+    <div className="mx-auto w-full max-w-[min(100%,100rem)] space-y-12 px-4 py-10 sm:px-6 lg:space-y-14 lg:py-14">
       <HeroBlood />
       <NewspaperFrontPage
         externalNews={externalNews}

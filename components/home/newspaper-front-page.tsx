@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Newspaper, Sparkles } from "lucide-react";
+import { Flame, Sparkles } from "lucide-react";
 import type { Listing } from "@/lib/types";
 import type { ExternalNewsItem } from "@/lib/external-news";
 import { ListingCard } from "@/components/listing-card";
@@ -8,52 +8,10 @@ import { LocationMapPreview } from "@/components/home/location-map-preview";
 import { FutureAiPanel } from "@/components/home/future-ai-panel";
 import { MastheadDate } from "@/components/home/masthead-date";
 import { Button } from "@/components/ui/button";
-
-function MiniListingStrip({
-  title,
-  href,
-  items,
-  kicker,
-}: {
-  title: string;
-  href: string;
-  items: Listing[];
-  kicker: string;
-}) {
-  return (
-    <div className="rounded-xl border border-border/70 bg-[color-mix(in_oklab,var(--background)_92%,var(--foreground))] p-4">
-      <div className="flex items-start justify-between gap-2">
-        <div>
-          <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--bangla-green-strong)]">
-            {kicker}
-          </p>
-          <h3 className="mt-1 text-lg font-bold text-foreground">{title}</h3>
-        </div>
-        <Button variant="ghost" size="sm" className="h-8 shrink-0 px-2 text-xs" asChild>
-          <Link href={href}>সব দেখুন</Link>
-        </Button>
-      </div>
-      <ul className="mt-3 space-y-2 border-t border-dashed border-border pt-3">
-        {items.length === 0 && (
-          <li className="text-xs text-muted-foreground">এই মুহূর্তে তালিকা খালি — API চালু করে আবার চেষ্টা করুন।</li>
-        )}
-        {items.map((it) => (
-          <li key={it.id}>
-            <Link
-              href={`/listings/${it.id}`}
-              className="group flex items-start justify-between gap-2 text-sm font-medium text-foreground/90 hover:text-[var(--bangla-red)]"
-            >
-              <span className="line-clamp-2">{it.title}</span>
-              <span className="shrink-0 text-[10px] uppercase text-muted-foreground group-hover:text-[var(--bangla-red)]">
-                {it.type.replaceAll("_", " ")}
-              </span>
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
+import { FeedStoriesBar } from "@/components/home/feed-stories-bar";
+import { FeedWidgetStrip } from "@/components/home/feed-widget-strip";
+import { HomeFeedRail } from "@/components/home/home-feed-rail";
+import { FeedReveal } from "@/components/home/feed-reveal";
 
 type MapMarkerLite = {
   id: string;
@@ -63,6 +21,32 @@ type MapMarkerLite = {
   title: string;
   type: string;
 };
+
+function FeedSectionTitle({
+  title,
+  subtitle,
+  icon: Icon,
+}: {
+  title: string;
+  subtitle?: string;
+  icon?: React.ComponentType<{ className?: string }>;
+}) {
+  return (
+    <div className="flex flex-wrap items-end justify-between gap-3">
+      <div className="flex items-center gap-2.5">
+        {Icon && (
+          <span className="flex h-9 w-9 items-center justify-center rounded-2xl border border-border/70 bg-gradient-to-br from-card to-muted/40 text-[var(--bangla-red)] shadow-sm">
+            <Icon className="h-4 w-4" />
+          </span>
+        )}
+        <div>
+          <h2 className="text-lg font-bold tracking-tight text-foreground md:text-xl">{title}</h2>
+          {subtitle && <p className="mt-0.5 max-w-2xl text-xs text-muted-foreground">{subtitle}</p>}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export function NewspaperFrontPage({
   externalNews,
@@ -90,149 +74,194 @@ export function NewspaperFrontPage({
   const lower = externalNews.slice(4, 8);
 
   return (
-    <div className="space-y-10 lg:space-y-12">
-      <header className="border-b-[3px] border-double border-[color-mix(in_oklab,var(--accent-ink)_20%,var(--border))] pb-5">
-        <div className="flex flex-wrap items-end justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <span className="flex h-11 w-11 items-center justify-center rounded-sm border-2 border-[var(--border)] bg-muted/50 text-[var(--bangla-red)] shadow-sm">
-              <Newspaper className="h-6 w-6" />
-            </span>
-            <div>
-              <p className="font-tiro-bangla text-2xl font-semibold tracking-tight text-[var(--accent-ink)] md:text-[1.75rem]">
-                লাইফলিংক — আজকের পাতা
-              </p>
-              <p className="mt-0.5 text-xs text-muted-foreground">
-                সংবাদ, রক্ত, চাকরি, স্বাস্থ্য ও শিক্ষা — একসাথে, পত্রিকার প্রথম পাতার মতো সাজানো।
+    <div className="space-y-8 lg:space-y-10">
+      <div id="home-feed-top" className="scroll-mt-24 space-y-4">
+        <div className="relative overflow-hidden rounded-3xl border border-border/60 bg-card/50 p-4 shadow-xl shadow-black/[0.06] backdrop-blur-md dark:bg-card/35 dark:shadow-black/40 sm:p-5">
+          <div className="pointer-events-none absolute -right-24 -top-20 h-56 w-56 rounded-full bg-[var(--bangla-green)]/[0.12] blur-3xl motion-safe:animate-pulse" />
+          <div className="pointer-events-none absolute -bottom-24 -left-16 h-52 w-52 rounded-full bg-[var(--bangla-red)]/[0.1] blur-3xl motion-safe:animate-pulse motion-safe:[animation-delay:1.2s]" />
+          <div className="relative flex flex-wrap items-center justify-between gap-4">
+            <div className="flex min-w-0 items-center gap-3">
+              <span className="relative flex shrink-0">
+                <span className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[var(--bangla-red)]/30 to-[var(--bangla-green)]/25 blur-md motion-safe:animate-pulse" />
+                <span className="relative flex h-12 w-12 items-center justify-center rounded-2xl border border-border/80 bg-card font-tiro-bangla text-lg font-bold text-[var(--accent-ink)] shadow-inner">
+                  লি
+                </span>
+              </span>
+              <div className="min-w-0">
+                <p className="font-tiro-bangla text-xl font-semibold tracking-tight text-[var(--accent-ink)] md:text-2xl">
+                  আপনার লাইফলিংক ফিড
+                </p>
+                <p className="mt-0.5 text-xs text-muted-foreground">
+                  সংবাদ, রক্ত, চাকরি, স্বাস্থ্য ও শিক্ষা — একই টাইমলাইনে, আপডেট হতে থাকা কার্ড।
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-col items-end gap-1 text-right text-xs text-muted-foreground">
+              <div className="flex items-center gap-2">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400/45 opacity-75" />
+                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500 shadow-[0_0_0_2px_color-mix(in_oklab,var(--background)_70%,transparent)]" />
+                </span>
+                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400">
+                  লাইভ
+                </span>
+              </div>
+              <MastheadDate className="font-mono text-[11px] text-foreground/80" />
+              <p className="flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+                <Sparkles className="h-3 w-3 text-[var(--accent-gold)]" />
+                বাংলা ভাষা ও নগরের সেবা
               </p>
             </div>
           </div>
-          <div className="text-right text-xs text-muted-foreground">
-            <MastheadDate className="font-mono" />
-            <p className="mt-1 flex items-center justify-end gap-1 text-[10px] uppercase tracking-wide">
-              <Sparkles className="h-3 w-3 text-[var(--accent-gold)]" />
-              বাংলা ভাষা ও নগরের সেবা
-            </p>
-          </div>
-        </div>
-      </header>
-
-      <section className="grid gap-6 lg:grid-cols-12 lg:gap-8">
-        <div className="space-y-5 lg:col-span-7">
-          <div className="flex items-center justify-between gap-2">
-            <h2 className="text-xl font-bold text-foreground">প্রধান সংবাদ</h2>
-            <span className="hidden text-xs text-muted-foreground sm:inline">
-              বাইরের সংবাদমাধ্যম — ক্লিক করলে তাদের সাইটে যাবেন
-            </span>
-          </div>
-          {lead ? (
-            <ExternalNewsCard item={lead} featured />
-          ) : (
-            <p className="rounded-xl border border-dashed border-border p-6 text-sm text-muted-foreground">
-              সংবাদ ফিড আসছে না — নেটওয়ার্ক বা ফিড সীমা হতে পারে। কিছুক্ষণ পরে রিফ্রেশ করুন।
-            </p>
-          )}
-          <div className="grid gap-4 sm:grid-cols-2">
-            {rail.map((it) => (
-              <ExternalNewsCard key={it.id} item={it} />
-            ))}
-          </div>
         </div>
 
-        <aside className="space-y-5 lg:col-span-5">
-          <MiniListingStrip
-            kicker="জরুরি"
-            title="কাছের রক্তদাতা"
-            href="/blood"
-            items={donors.slice(0, 4)}
-          />
-          <MiniListingStrip
+        <FeedStoriesBar />
+      </div>
+
+      <div className="flex flex-col gap-10 xl:grid xl:grid-cols-[minmax(0,1fr)_minmax(0,18rem)] xl:items-start xl:gap-8 2xl:grid-cols-[minmax(0,12rem)_minmax(0,1fr)_minmax(0,18rem)]">
+        <HomeFeedRail />
+
+        <div className="min-w-0">
+          <div className="relative">
+            <div
+              aria-hidden
+              className="pointer-events-none absolute bottom-4 left-[0.65rem] top-4 hidden w-px bg-gradient-to-b from-transparent via-border/70 to-transparent md:block"
+            />
+            <div className="space-y-10 md:pl-9">
+              <FeedReveal>
+                <section id="home-feed-lead" className="scroll-mt-24 space-y-5">
+                  <FeedSectionTitle
+                    title="প্রধান সংবাদ"
+                    subtitle="বাইরের সংবাদমাধ্যম — ক্লিক করলে তাদের সাইটে যাবেন"
+                  />
+                  {lead ? (
+                    <ExternalNewsCard item={lead} featured />
+                  ) : (
+                    <p className="rounded-3xl border border-dashed border-border/80 bg-muted/30 p-6 text-sm text-muted-foreground backdrop-blur-sm">
+                      সংবাদ ফিড আসছে না — নেটওয়ার্ক বা ফিড সীমা হতে পারে। কিছুক্ষণ পরে রিফ্রেশ করুন।
+                    </p>
+                  )}
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    {rail.map((it) => (
+                      <ExternalNewsCard key={it.id} item={it} />
+                    ))}
+                  </div>
+                </section>
+              </FeedReveal>
+
+              <FeedReveal>
+                <section
+                  id="home-feed-hub"
+                  className="scroll-mt-24 grid grid-cols-1 gap-6 md:grid-cols-2 2xl:grid-cols-3"
+                >
+                  <div className="min-w-0 space-y-4 rounded-3xl border border-border/60 bg-card/45 p-4 shadow-md shadow-black/[0.04] backdrop-blur-md dark:bg-card/25">
+                    <FeedSectionTitle title="চাকরির বাজার" icon={Flame} />
+                    <div className="grid gap-3">
+                      {jobs.slice(0, 2).map((j) => (
+                        <ListingCard key={j.id} listing={j} density="compact" />
+                      ))}
+                      {jobs.length === 0 && <p className="text-xs text-muted-foreground">কোনো চাকরির তালিকা নেই।</p>}
+                    </div>
+                  </div>
+                  <div className="min-w-0 space-y-4 rounded-3xl border border-border/60 bg-card/45 p-4 shadow-md shadow-black/[0.04] backdrop-blur-md dark:bg-card/25">
+                    <FeedSectionTitle title="ক্লিনিক ও ফার্মেসি" />
+                    <div className="grid gap-3">
+                      {clinics.slice(0, 1).map((c) => (
+                        <ListingCard key={c.id} listing={c} density="compact" />
+                      ))}
+                      {pharmacies.slice(0, 1).map((p) => (
+                        <ListingCard key={p.id} listing={p} density="compact" />
+                      ))}
+                      {clinics.length === 0 && pharmacies.length === 0 && (
+                        <p className="text-xs text-muted-foreground">ক্লিনিক/ফার্মেসি তালিকা খালি।</p>
+                      )}
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      <Button variant="secondary" size="sm" className="rounded-full" asChild>
+                        <Link href="/clinics">সব ক্লিনিক</Link>
+                      </Button>
+                      <Button variant="secondary" size="sm" className="rounded-full" asChild>
+                        <Link href="/pharmacies">সব ফার্মেসি</Link>
+                      </Button>
+                    </div>
+                  </div>
+                  <div className="min-w-0 space-y-4 rounded-3xl border border-border/60 bg-card/45 p-4 shadow-md shadow-black/[0.04] backdrop-blur-md dark:bg-card/25">
+                    <FeedSectionTitle title="লাইফলিংক নিউজ ডেস্ক" subtitle="প্ল্যাটফর্মে প্রকাশিত সংবাদ ও নোটিশ।" />
+                    <div className="grid gap-3">
+                      {news.slice(0, 2).map((n) => (
+                        <ListingCard key={n.id} listing={n} density="compact" />
+                      ))}
+                      {news.length === 0 && <p className="text-xs text-muted-foreground">কোনো অভ্যন্তরীণ সংবাদ নেই।</p>}
+                    </div>
+                    <Button variant="outline" size="sm" className="rounded-full" asChild>
+                      <Link href="/news">আরও সংবাদ</Link>
+                    </Button>
+                  </div>
+                </section>
+              </FeedReveal>
+
+              <FeedReveal>
+                <section
+                  id="home-feed-more"
+                  className="scroll-mt-24 grid min-w-0 gap-8 lg:grid-cols-[minmax(0,1.55fr)_minmax(0,1fr)]"
+                >
+                  <div className="min-w-0 space-y-4">
+                    <FeedSectionTitle title="আরও শিরোনাম" />
+                    <div className="grid grid-cols-1 gap-4 min-[36rem]:grid-cols-2">
+                      {lower.map((it) => (
+                        <ExternalNewsCard key={it.id} item={it} />
+                      ))}
+                    </div>
+                  </div>
+                  <div className="min-w-0 space-y-4">
+                    <FeedSectionTitle title="শিক্ষক ও প্রশিক্ষণ" />
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      {teachers.slice(0, 4).map((t) => (
+                        <ListingCard key={t.id} listing={t} density="compact" />
+                      ))}
+                      {teachers.length === 0 && <p className="text-xs text-muted-foreground">শিক্ষক তালিকা খালি।</p>}
+                    </div>
+                  </div>
+                </section>
+              </FeedReveal>
+
+              <FeedReveal>
+                <div id="home-feed-ai" className="scroll-mt-24">
+                  <FutureAiPanel />
+                </div>
+              </FeedReveal>
+            </div>
+          </div>
+        </div>
+
+        <aside
+          id="home-feed-sidebar"
+          className="scroll-mt-24 min-w-0 space-y-5 xl:sticky xl:top-24"
+        >
+          <FeedWidgetStrip kicker="জরুরি" title="কাছের রক্তদাতা" href="/blood" items={donors.slice(0, 4)} accent="red" />
+          <FeedWidgetStrip
             kicker="স্বাস্থ্য"
             title="রক্তব্যাংক ও ব্যাংক তালিকা"
             href="/blood"
             items={banks.slice(0, 3)}
+            accent="green"
           />
-          <div className="rounded-xl border border-border bg-card p-4 shadow-sm">
-            <div className="flex items-center justify-between gap-2">
-              <h3 className="text-lg font-bold text-foreground">লাইভ মানচিত্র</h3>
-              <Button variant="outline" size="sm" className="h-8 text-xs" asChild>
-                <Link href="/map">পূর্ণ মানচিত্র</Link>
-              </Button>
-            </div>
-            <div className="mt-3">
-              <LocationMapPreview initialMarkers={initialMapMarkers} />
+          <div className="overflow-hidden rounded-3xl border border-border/70 bg-card/90 shadow-lg shadow-black/[0.04] backdrop-blur-md dark:shadow-black/30">
+            <div className="h-1 w-full bg-gradient-to-r from-[var(--bangla-green)]/25 via-[var(--accent-gold)]/30 to-[var(--bangla-red)]/25" />
+            <div className="p-4">
+              <div className="flex items-center justify-between gap-2">
+                <h3 className="text-base font-bold text-foreground">লাইভ মানচিত্র</h3>
+                <Button variant="outline" size="sm" className="h-8 rounded-full text-xs" asChild>
+                  <Link href="/map">পূর্ণ মানচিত্র</Link>
+                </Button>
+              </div>
+              <div className="mt-3 overflow-hidden rounded-2xl ring-1 ring-border/60">
+                <LocationMapPreview initialMarkers={initialMapMarkers} />
+              </div>
             </div>
           </div>
         </aside>
-      </section>
-
-      <section className="grid gap-6 lg:grid-cols-12">
-        <div className="lg:col-span-4 space-y-4">
-          <h3 className="text-lg font-bold text-foreground">চাকরির বাজার</h3>
-          <div className="grid gap-3">
-            {jobs.slice(0, 2).map((j) => (
-              <ListingCard key={j.id} listing={j} />
-            ))}
-            {jobs.length === 0 && <p className="text-xs text-muted-foreground">কোনো চাকরির তালিকা নেই।</p>}
-          </div>
-        </div>
-        <div className="lg:col-span-4 space-y-4">
-          <h3 className="text-lg font-bold text-foreground">ক্লিনিক ও ফার্মেসি</h3>
-          <div className="grid gap-3">
-            {clinics.slice(0, 1).map((c) => (
-              <ListingCard key={c.id} listing={c} />
-            ))}
-            {pharmacies.slice(0, 1).map((p) => (
-              <ListingCard key={p.id} listing={p} />
-            ))}
-            {clinics.length === 0 && pharmacies.length === 0 && (
-              <p className="text-xs text-muted-foreground">ক্লিনিক/ফার্মেসি তালিকা খালি।</p>
-            )}
-          </div>
-          <div className="flex flex-wrap gap-2">
-            <Button variant="secondary" size="sm" asChild>
-              <Link href="/clinics">সব ক্লিনিক</Link>
-            </Button>
-            <Button variant="secondary" size="sm" asChild>
-              <Link href="/pharmacies">সব ফার্মেসি</Link>
-            </Button>
-          </div>
-        </div>
-        <div className="lg:col-span-4 space-y-4">
-          <h3 className="text-lg font-bold text-foreground">লাইফলিংক নিউজ ডেস্ক</h3>
-          <p className="text-xs text-muted-foreground">প্ল্যাটফর্মে প্রকাশিত সংবাদ ও নোটিশ।</p>
-          <div className="grid gap-3">
-            {news.slice(0, 2).map((n) => (
-              <ListingCard key={n.id} listing={n} />
-            ))}
-            {news.length === 0 && <p className="text-xs text-muted-foreground">কোনো অভ্যন্তরীণ সংবাদ নেই।</p>}
-          </div>
-          <Button variant="outline" size="sm" asChild>
-            <Link href="/news">আরও সংবাদ</Link>
-          </Button>
-        </div>
-      </section>
-
-      <section className="grid gap-6 lg:grid-cols-12">
-        <div className="lg:col-span-6 space-y-4">
-          <h3 className="text-lg font-bold text-foreground">আরও শিরোনাম</h3>
-          <div className="grid gap-4 sm:grid-cols-2">
-            {lower.map((it) => (
-              <ExternalNewsCard key={it.id} item={it} />
-            ))}
-          </div>
-        </div>
-        <div className="lg:col-span-6 space-y-4">
-          <h3 className="text-lg font-bold text-foreground">শিক্ষক ও প্রশিক্ষণ</h3>
-          <div className="grid gap-3 sm:grid-cols-2">
-            {teachers.slice(0, 4).map((t) => (
-              <ListingCard key={t.id} listing={t} />
-            ))}
-            {teachers.length === 0 && <p className="text-xs text-muted-foreground">শিক্ষক তালিকা খালি।</p>}
-          </div>
-        </div>
-      </section>
-
-      <FutureAiPanel />
+      </div>
     </div>
   );
 }

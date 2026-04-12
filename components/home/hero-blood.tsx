@@ -1,16 +1,35 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Droplets, MapPin, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GeoBloodQuickForm } from "@/components/home/geo-blood-quick-form";
 
 export function HeroBlood() {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  const blobY = useTransform(scrollYProgress, [0, 1], [0, -42]);
+  const blobY2 = useTransform(scrollYProgress, [0, 1], [0, 28]);
+
   return (
-    <section className="relative overflow-hidden rounded-2xl border border-border/70 bg-background px-6 py-10 shadow-sm sm:px-10 sm:py-12">
-      <div className="pointer-events-none absolute -right-20 -top-16 h-64 w-64 rounded-full bg-[var(--bangla-red)]/10 blur-3xl" />
-      <div className="pointer-events-none absolute -left-16 bottom-0 h-48 w-48 rounded-full bg-[var(--bangla-green)]/10 blur-3xl" />
+    <section
+      ref={ref}
+      id="page-top"
+      className="relative overflow-hidden rounded-3xl border border-border/60 bg-gradient-to-br from-card/80 via-background to-background px-6 py-10 shadow-lg shadow-black/[0.05] backdrop-blur-md dark:shadow-black/30 sm:px-10 sm:py-12"
+    >
+      <motion.div
+        style={{ y: blobY }}
+        className="pointer-events-none absolute -right-20 -top-16 h-64 w-64 rounded-full bg-[var(--bangla-red)]/12 blur-3xl"
+      />
+      <motion.div
+        style={{ y: blobY2 }}
+        className="pointer-events-none absolute -left-16 bottom-0 h-52 w-52 rounded-full bg-[var(--bangla-green)]/12 blur-3xl"
+      />
       <div className="relative grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
         <div>
           <motion.div
@@ -33,8 +52,8 @@ export function HeroBlood() {
             </h1>
           </motion.div>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground">
-            রক্ত, ক্লিনিক, ফার্মেসি, চাকরি, শিক্ষক আর দেশি-বিদেশি সংবাদ — সব একসাথে, পত্রিকার প্রথম পাতার মতো
-            গুছিয়ে। সংবাদ শিরোনামগুলো বাইরের সংস্থার; ক্লিক করলে তাদের লিংকে চলে যাবেন।
+            রক্ত, ক্লিনিক, ফার্মেসি, চাকরি, শিক্ষক আর দেশি-বিদেশি সংবাদ — সব একসাথে, সোশ্যাল ফিডের মতো গতিতে আপডেট হওয়া
+            কার্ডে গুছিয়ে। সংবাদ শিরোনামগুলো বাইরের সংস্থার; ক্লিক করলে তাদের লিংকে চলে যাবেন।
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button
@@ -68,7 +87,7 @@ export function HeroBlood() {
             ].map((item) => (
               <div
                 key={item.t}
-                className="rounded-xl border border-border/80 bg-[color-mix(in_oklab,var(--background)_88%,var(--foreground))] p-4 text-sm shadow-sm backdrop-blur-sm"
+                className="rounded-2xl border border-border/70 bg-card/70 p-4 text-sm shadow-sm backdrop-blur-md transition hover:-translate-y-0.5 hover:shadow-md"
               >
                 <item.icon className="h-5 w-5 text-[var(--bangla-green)]" />
                 <p className="mt-2 font-semibold text-card-foreground">{item.t}</p>

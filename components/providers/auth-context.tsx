@@ -10,6 +10,7 @@ import {
   type ReactNode,
 } from "react";
 import type { AuthUser } from "@/lib/types";
+import { LIFELINK_TOKEN_STORAGE_KEY } from "@/lib/auth-constants";
 import { clientFetch } from "@/lib/client-api";
 
 type AuthState = {
@@ -23,7 +24,7 @@ type AuthState = {
 
 const AuthContext = createContext<AuthState | null>(null);
 
-const STORAGE_KEY = "lifelink_token";
+const STORAGE_KEY = LIFELINK_TOKEN_STORAGE_KEY;
 const USER_KEY = "lifelink_user";
 
 export function AuthProvider({ children }: { children: ReactNode }) {

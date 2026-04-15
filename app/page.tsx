@@ -1,6 +1,6 @@
 import { HeroBlood } from "@/components/home/hero-blood";
 import { NewspaperFrontPage } from "@/components/home/newspaper-front-page";
-import { apiGetListings, apiBloodSearch, apiGetMarkers } from "@/lib/api";
+import { apiGetListings, apiBloodSearch, apiGetMarkers, apiGetFeedPosts } from "@/lib/api";
 import { fetchExternalNews } from "@/lib/external-news";
 import type { Listing } from "@/lib/types";
 
@@ -25,9 +25,18 @@ async function safeMarkers(lat: number, lng: number) {
   }
 }
 
+async function safeFeedPosts() {
+  try {
+    return await apiGetFeedPosts({ take: 40 });
+  } catch {
+    return [];
+  }
+}
+
 export default async function HomePage() {
   const [
     externalNews,
+    userPosts,
     news,
     jobs,
     clinics,
@@ -37,6 +46,7 @@ export default async function HomePage() {
     initialMapMarkers,
   ] = await Promise.all([
     fetchExternalNews(14).catch(() => []),
+    safeFeedPosts(),
     safeListings({ type: "NEWS", lat: BD_LAT, lng: BD_LNG, radiusKm: 200, take: 6 }),
     safeListings({ type: "JOB", lat: BD_LAT, lng: BD_LNG, radiusKm: 120, take: 8 }),
     safeListings({
@@ -72,6 +82,7 @@ export default async function HomePage() {
       <HeroBlood />
       <NewspaperFrontPage
         externalNews={externalNews}
+        userPosts={userPosts}
         news={news}
         jobs={jobs}
         clinics={clinics}

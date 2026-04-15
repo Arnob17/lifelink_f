@@ -30,3 +30,17 @@ export type AuthUser = {
   name: string;
   role: UserRole;
 };
+
+export type FeedPostAuthor = {
+  id: string;
+  name: string;
+};
+
+export type UserFeedPost = {
+  id: string;
+  title: string | null;
+  content: string;
+  createdAt: string;
+  updatedAt: string;
+  author: FeedPostAuthor;
+};

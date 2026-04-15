@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { Flame, Sparkles } from "lucide-react";
-import type { Listing } from "@/lib/types";
+import { Flame, MessagesSquare, Sparkles } from "lucide-react";
+import type { Listing, UserFeedPost } from "@/lib/types";
 import type { ExternalNewsItem } from "@/lib/external-news";
 import { ListingCard } from "@/components/listing-card";
 import { ExternalNewsCard } from "@/components/home/external-news-card";
@@ -12,6 +12,7 @@ import { FeedStoriesBar } from "@/components/home/feed-stories-bar";
 import { FeedWidgetStrip } from "@/components/home/feed-widget-strip";
 import { HomeFeedRail } from "@/components/home/home-feed-rail";
 import { FeedReveal } from "@/components/home/feed-reveal";
+import { UserCommunityFeed } from "@/components/home/user-community-feed";
 
 type MapMarkerLite = {
   id: string;
@@ -50,6 +51,7 @@ function FeedSectionTitle({
 
 export function NewspaperFrontPage({
   externalNews,
+  userPosts,
   news,
   jobs,
   clinics,
@@ -60,6 +62,7 @@ export function NewspaperFrontPage({
   initialMapMarkers,
 }: {
   externalNews: ExternalNewsItem[];
+  userPosts: UserFeedPost[];
   news: Listing[];
   jobs: Listing[];
   clinics: Listing[];
@@ -128,6 +131,17 @@ export function NewspaperFrontPage({
               className="pointer-events-none absolute bottom-4 left-[0.65rem] top-4 hidden w-px bg-gradient-to-b from-transparent via-border/70 to-transparent md:block"
             />
             <div className="space-y-10 md:pl-9">
+              <FeedReveal>
+                <section id="home-feed-community" className="scroll-mt-24 space-y-4">
+                  <FeedSectionTitle
+                    title="কমিউনিটি পোস্ট"
+                    subtitle="ফেসবুক বা রেডিটের মতো — সাইন ইন করে লিখুন, সবাই পড়তে পারবে।"
+                    icon={MessagesSquare}
+                  />
+                  <UserCommunityFeed initialPosts={userPosts} />
+                </section>
+              </FeedReveal>
+
               <FeedReveal>
                 <section id="home-feed-lead" className="scroll-mt-24 space-y-5">
                   <FeedSectionTitle

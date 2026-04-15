@@ -1,7 +1,7 @@
-import type { Listing } from "./types";
+import type { Listing, UserFeedPost } from "./types";
+import { getPublicApiBaseUrl } from "./api-base";
 
-const base = () =>
-  process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000/api";
+const base = () => getPublicApiBaseUrl();
 
 export async function apiGet<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(`${base()}${path}`, {
@@ -51,6 +51,17 @@ export async function apiGetMarkers(params: {
       distanceKm: number | null;
     }>
   >(`/map/markers?${q.toString()}`);
+}
+
+export async function apiGetFeedPosts(params?: {
+  take?: number;
+  skip?: number;
+}): Promise<UserFeedPost[]> {
+  const q = new URLSearchParams();
+  if (params?.take != null) q.set("take", String(params.take));
+  if (params?.skip != null) q.set("skip", String(params.skip));
+  const suffix = q.toString() ? `?${q}` : "";
+  return apiGet<UserFeedPost[]>(`/posts${suffix}`);
 }
 
 export async function apiBloodSearch(params: {

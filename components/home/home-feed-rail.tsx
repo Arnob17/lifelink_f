@@ -6,6 +6,7 @@ import {
   Flame,
   LayoutGrid,
   MapPin,
+  MessagesSquare,
   Newspaper,
   Sparkles,
   Waves,
@@ -15,6 +16,7 @@ import { cn } from "@/lib/utils";
 const links = [
   { id: "page-top", label: "শীর্ষ", hint: "Top", icon: Waves },
   { id: "home-feed-top", label: "ফিড", hint: "Feed", icon: LayoutGrid },
+  { id: "home-feed-community", label: "পোস্ট", hint: "Posts", icon: MessagesSquare },
   { id: "home-feed-lead", label: "সংবাদ", hint: "News", icon: Newspaper },
   { id: "home-feed-hub", label: "হাব", hint: "Hub", icon: Flame },
   { id: "home-feed-more", label: "আরও", hint: "More", icon: AlignLeft },

@@ -44,3 +44,14 @@ export type UserFeedPost = {
   updatedAt: string;
   author: FeedPostAuthor;
 };
+
+export type SosNearbyAlert = {
+  id: string;
+  authorId: string;
+  lat: number;
+  lng: number;
+  message: string | null;
+  createdAt: string;
+  authorName: string;
+  distanceKm: number;
+};

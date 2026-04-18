@@ -4,6 +4,7 @@ import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { AppProviders } from "@/components/providers/app-providers";
+import { SosPresence } from "@/components/sos/sos-presence";
 import { geistMono, geistSans, notoBengali, tiroBangla } from "@/lib/fonts";
 import { THEME_STORAGE_KEY } from "@/lib/theme-storage";
 
@@ -33,6 +34,7 @@ export default function RootLayout({
         <AppProviders>
           <div className="flex min-h-full flex-col">
             <SiteHeader />
+            <SosPresence />
             <main className="flex-1">{children}</main>
             <SiteFooter />
           </div>

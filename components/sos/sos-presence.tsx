@@ -41,7 +41,7 @@ export function SosPresence() {
 
   useEffect(() => {
     if (!navigator.geolocation) {
-      setGeoNote("এই ব্রাউজারে অবস্থান সাপোর্ট নেই — SOS দেখতে পারবেন না।");
+      setGeoNote("এই ব্রাউজারে অবস্থান সাপোর্ট নেই, তাই SOS দেখতে পারবেন না।");
       return;
     }
     navigator.geolocation.getCurrentPosition(
@@ -173,7 +173,7 @@ export function SosPresence() {
             <div className="flex items-center gap-2 text-sm font-semibold text-[var(--bangla-red)] dark:text-red-200">
               <Radio className="h-4 w-4 shrink-0 animate-pulse" aria-hidden />
               <span className="font-tiro-bangla">
-                কাছাকাছি SOS ({SOS_NEARBY_RADIUS_KM} কিমি) — সহায়তা প্রয়োজন হতে পারে
+                কাছাকাছি SOS ({SOS_NEARBY_RADIUS_KM} কিমি), সহায়তা প্রয়োজন হতে পারে
               </span>
             </div>
             <ul className="flex max-h-[40vh] flex-col gap-2 overflow-y-auto sm:max-h-48">

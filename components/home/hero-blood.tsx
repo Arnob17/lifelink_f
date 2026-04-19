@@ -46,13 +46,13 @@ export function HeroBlood() {
             transition={{ delay: 0.05 }}
             className="mt-4"
           >
-            <h1 className="font-tiro-bangla text-4xl font-semibold leading-tight tracking-tight text-[var(--accent-ink)] sm:text-5xl">
+            <h1 className="font-tiro-bangla text-4xl font-semibold leading-tight text-[var(--accent-ink)] sm:text-5xl">
               মানুষের সেবা,
               <span className="text-[var(--bangla-green-strong)]"> এক ঠাঁইয়ে।</span>
             </h1>
           </motion.div>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground">
-            রক্ত, ক্লিনিক, ফার্মেসি, চাকরি, শিক্ষক আর দেশি-বিদেশি সংবাদ — সব একসাথে, সোশ্যাল ফিডের মতো গতিতে আপডেট হওয়া
+            রক্ত, ক্লিনিক, ফার্মেসি, চাকরি, শিক্ষক আর দেশি-বিদেশি সংবাদ, সব একসাথে, সোশ্যাল ফিডের মতো গতিতে আপডেট হওয়া
             কার্ডে গুছিয়ে। সংবাদ শিরোনামগুলো বাইরের সংস্থার; ক্লিক করলে তাদের লিংকে চলে যাবেন।
           </p>
           <div className="mt-8 flex flex-wrap gap-3">

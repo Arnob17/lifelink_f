@@ -60,7 +60,7 @@ export function ExternalNewsCard({
         <div className="mt-3 flex items-start justify-between gap-2">
           <h3
             className={cn(
-              "font-semibold leading-snug tracking-tight text-card-foreground",
+              "font-semibold leading-snug text-card-foreground",
               featured ? "text-lg sm:text-xl" : "text-base",
             )}
           >
@@ -68,7 +68,7 @@ export function ExternalNewsCard({
           </h3>
         </div>
         <p className="mt-2 text-xs text-muted-foreground">
-          মূল প্রতিবেদন খুলতে ক্লিক করুন — আমরা শুধু সংযোগ দেখাচ্ছি, বিষয়বস্তু সেই সংস্থার।
+          মূল প্রতিবেদন খুলতে ক্লিক করুন। আমরা শুধু সংযোগ দেখাচ্ছি, বিষয়বস্তু সেই সংস্থার।
         </p>
         <div className="mt-4 flex items-center border-t border-border/60 pt-3 text-[11px] font-semibold text-muted-foreground">
           <span className="inline-flex items-center gap-1.5 text-[var(--bangla-red)] transition group-hover:underline">

@@ -51,7 +51,7 @@ export function FeedWidgetStrip({
         <ul className="mt-3 space-y-1 border-t border-border/60 pt-3">
           {items.length === 0 && (
             <li className="rounded-2xl bg-muted/50 px-3 py-2.5 text-xs text-muted-foreground">
-              এই মুহূর্তে তালিকা খালি — API চালু করে আবার চেষ্টা করুন।
+              এই মুহূর্তে তালিকা খালি। API চালু করে আবার চেষ্টা করুন।
             </li>
           )}
           {items.map((it, i) => (

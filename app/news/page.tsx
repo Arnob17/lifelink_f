@@ -28,8 +28,8 @@ export default async function NewsPage() {
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--bangla-green)]">
           সংবাদ ডেস্ক
         </p>
-        <h1 className="mt-2 text-3xl font-bold tracking-tight text-foreground">
-          সংবাদ — বাইরের শিরোনাম ও লাইফলিংক নিজস্ব
+        <h1 className="mt-2 text-3xl font-bold text-foreground">
+          সংবাদ: বাইরের শিরোনাম ও লাইফলিংক নিজস্ব
         </h1>
         <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
           উপরের কার্ডগুলো বিভিন্ন সংবাদমাধ্যমের RSS থেকে এসেছে; ক্লিক করলে তাদের ওয়েবসাইটে
@@ -41,7 +41,7 @@ export default async function NewsPage() {
         <h2 className="text-xl font-bold text-foreground">শিরোনাম (বহিঃসূত্র)</h2>
         <div className="grid gap-4 md:grid-cols-2">
           {external.length === 0 && (
-            <p className="text-sm text-muted-foreground">ফিড লোড হয়নি — পরে আবার চেষ্টা করুন।</p>
+            <p className="text-sm text-muted-foreground">ফিড লোড হয়নি। পরে আবার চেষ্টা করুন।</p>
           )}
           {external.map((item, i) => (
             <ExternalNewsCard key={item.id} item={item} featured={i === 0} />

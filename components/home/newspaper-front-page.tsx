@@ -1,11 +1,10 @@
 import Link from "next/link";
-import { Flame, MessagesSquare, Sparkles } from "lucide-react";
+import { Flame, MessagesSquare } from "lucide-react";
 import type { Listing, UserFeedPost } from "@/lib/types";
 import type { ExternalNewsItem } from "@/lib/external-news";
 import { ListingCard } from "@/components/listing-card";
 import { ExternalNewsCard } from "@/components/home/external-news-card";
 import { LocationMapPreview } from "@/components/home/location-map-preview";
-import { FutureAiPanel } from "@/components/home/future-ai-panel";
 import { MastheadDate } from "@/components/home/masthead-date";
 import { Button } from "@/components/ui/button";
 import { FeedStoriesBar } from "@/components/home/feed-stories-bar";
@@ -41,7 +40,7 @@ function FeedSectionTitle({
           </span>
         )}
         <div>
-          <h2 className="text-lg font-bold tracking-tight text-foreground md:text-xl">{title}</h2>
+          <h2 className="text-lg font-bold text-foreground md:text-xl">{title}</h2>
           {subtitle && <p className="mt-0.5 max-w-2xl text-xs text-muted-foreground">{subtitle}</p>}
         </div>
       </div>
@@ -80,40 +79,22 @@ export function NewspaperFrontPage({
     <div className="space-y-8 lg:space-y-10">
       <div id="home-feed-top" className="scroll-mt-24 space-y-4">
         <div className="relative overflow-hidden rounded-3xl border border-border/60 bg-card/50 p-4 shadow-xl shadow-black/[0.06] backdrop-blur-md dark:bg-card/35 dark:shadow-black/40 sm:p-5">
-          <div className="pointer-events-none absolute -right-24 -top-20 h-56 w-56 rounded-full bg-[var(--bangla-green)]/[0.12] blur-3xl motion-safe:animate-pulse" />
-          <div className="pointer-events-none absolute -bottom-24 -left-16 h-52 w-52 rounded-full bg-[var(--bangla-red)]/[0.1] blur-3xl motion-safe:animate-pulse motion-safe:[animation-delay:1.2s]" />
           <div className="relative flex flex-wrap items-center justify-between gap-4">
             <div className="flex min-w-0 items-center gap-3">
-              <span className="relative flex shrink-0">
-                <span className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[var(--bangla-red)]/30 to-[var(--bangla-green)]/25 blur-md motion-safe:animate-pulse" />
-                <span className="relative flex h-12 w-12 items-center justify-center rounded-2xl border border-border/80 bg-card font-tiro-bangla text-lg font-bold text-[var(--accent-ink)] shadow-inner">
-                  লি
-                </span>
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-border/80 bg-card font-tiro-bangla text-lg font-bold text-[var(--accent-ink)] shadow-inner">
+                লি
               </span>
               <div className="min-w-0">
-                <p className="font-tiro-bangla text-xl font-semibold tracking-tight text-[var(--accent-ink)] md:text-2xl">
+                <p className="font-tiro-bangla text-xl font-semibold text-[var(--accent-ink)] md:text-2xl">
                   আপনার লাইফলিংক ফিড
                 </p>
                 <p className="mt-0.5 text-xs text-muted-foreground">
-                  সংবাদ, রক্ত, চাকরি, স্বাস্থ্য ও শিক্ষা — একই টাইমলাইনে, আপডেট হতে থাকা কার্ড।
+                  সংবাদ, রক্ত, চাকরি, স্বাস্থ্য ও শিক্ষা। একই টাইমলাইনে, আপডেট হতে থাকা কার্ড।
                 </p>
               </div>
             </div>
             <div className="flex flex-col items-end gap-1 text-right text-xs text-muted-foreground">
-              <div className="flex items-center gap-2">
-                <span className="relative flex h-2.5 w-2.5">
-                  <span className="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400/45 opacity-75" />
-                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500 shadow-[0_0_0_2px_color-mix(in_oklab,var(--background)_70%,transparent)]" />
-                </span>
-                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400">
-                  লাইভ
-                </span>
-              </div>
               <MastheadDate className="font-mono text-[11px] text-foreground/80" />
-              <p className="flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
-                <Sparkles className="h-3 w-3 text-[var(--accent-gold)]" />
-                বাংলা ভাষা ও নগরের সেবা
-              </p>
             </div>
           </div>
         </div>
@@ -135,7 +116,7 @@ export function NewspaperFrontPage({
                 <section id="home-feed-community" className="scroll-mt-24 space-y-4">
                   <FeedSectionTitle
                     title="কমিউনিটি পোস্ট"
-                    subtitle="ফেসবুক বা রেডিটের মতো — সাইন ইন করে লিখুন, সবাই পড়তে পারবে।"
+                    subtitle="ফেসবুক বা রেডিটের মতো। সাইন ইন করে লিখুন, সবাই পড়তে পারবে।"
                     icon={MessagesSquare}
                   />
                   <UserCommunityFeed initialPosts={userPosts} />
@@ -146,13 +127,13 @@ export function NewspaperFrontPage({
                 <section id="home-feed-lead" className="scroll-mt-24 space-y-5">
                   <FeedSectionTitle
                     title="প্রধান সংবাদ"
-                    subtitle="বাইরের সংবাদমাধ্যম — ক্লিক করলে তাদের সাইটে যাবেন"
+                    subtitle="বাইরের সংবাদমাধ্যম, ক্লিক করলে তাদের সাইটে যাবেন"
                   />
                   {lead ? (
                     <ExternalNewsCard item={lead} featured />
                   ) : (
                     <p className="rounded-3xl border border-dashed border-border/80 bg-muted/30 p-6 text-sm text-muted-foreground backdrop-blur-sm">
-                      সংবাদ ফিড আসছে না — নেটওয়ার্ক বা ফিড সীমা হতে পারে। কিছুক্ষণ পরে রিফ্রেশ করুন।
+                      সংবাদ ফিড আসছে না। নেটওয়ার্ক বা ফিড সীমা হতে পারে। কিছুক্ষণ পরে রিফ্রেশ করুন।
                     </p>
                   )}
                   <div className="grid gap-4 sm:grid-cols-2">
@@ -239,11 +220,6 @@ export function NewspaperFrontPage({
                 </section>
               </FeedReveal>
 
-              <FeedReveal>
-                <div id="home-feed-ai" className="scroll-mt-24">
-                  <FutureAiPanel />
-                </div>
-              </FeedReveal>
             </div>
           </div>
         </div>

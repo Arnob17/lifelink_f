@@ -27,7 +27,7 @@ export function MapPageClient({
   const [lat, setLat] = useState(initialLat);
   const [lng, setLng] = useState(initialLng);
   const [markers, setMarkers] = useState<MapMarker[]>(initialMarkers);
-  const [note, setNote] = useState("ডেমো কেন্দ্র: ঢাকা — অবস্থান অনুমতি দিলে আপনার এলাকায় সরব।");
+  const [note, setNote] = useState("ডেমো কেন্দ্র: ঢাকা। অবস্থান অনুমতি দিলে আপনার এলাকায় সরব।");
 
   useEffect(() => {
     let cancelled = false;
@@ -56,7 +56,7 @@ export function MapPageClient({
         setNote("আপনার বর্তমান অবস্থানের চারপাশে মার্কার দেখানো হচ্ছে।");
       },
       () => {
-        setNote("অবস্থান পাওয়া যায়নি — ঢাকা কেন্দ্রিক মানচিত্র দেখাচ্ছি।");
+        setNote("অবস্থান পাওয়া যায়নি, তাই ঢাকা কেন্দ্রিক মানচিত্র দেখাচ্ছি।");
       },
       { enableHighAccuracy: false, maximumAge: 120_000, timeout: 12_000 },
     );

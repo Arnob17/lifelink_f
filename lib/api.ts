@@ -1,4 +1,4 @@
-import type { Listing, UserFeedPost } from "./types";
+import type { Listing, UserFeedPost, Product, ProductBrowseResult, CategoryCount } from "./types";
 import { getPublicApiBaseUrl } from "./api-base";
 
 const base = () => getPublicApiBaseUrl();
@@ -79,4 +79,25 @@ export async function apiBloodSearch(params: {
   return apiGet<{ donors: Listing[]; banks: Listing[] }>(
     `/blood/search?${q.toString()}`,
   );
+}
+
+// ─── Essential Things (E-Commerce) ─────────────────────────────
+
+export async function apiGetProducts(
+  search: Record<string, string | number | undefined>,
+): Promise<ProductBrowseResult> {
+  const q = new URLSearchParams();
+  for (const [k, v] of Object.entries(search)) {
+    if (v === undefined || v === "") continue;
+    q.set(k, String(v));
+  }
+  return apiGet<ProductBrowseResult>(`/products?${q.toString()}`);
+}
+
+export async function apiGetProduct(id: string): Promise<Product> {
+  return apiGet<Product>(`/products/${id}`, { next: { revalidate: 60 } });
+}
+
+export async function apiGetProductCategories(): Promise<CategoryCount[]> {
+  return apiGet<CategoryCount[]>("/products/categories");
 }

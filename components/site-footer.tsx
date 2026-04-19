@@ -10,7 +10,7 @@ export function SiteFooter() {
             <span className="text-xs font-semibold text-muted-foreground">LifeLink</span>
           </p>
           <p className="mt-1 max-w-md leading-relaxed">
-            রক্ত, স্বাস্থ্য, চাকরি, শিক্ষা ও সংবাদ — বাংলা ভাষায় চলা জীবনের জন্য এক ঠাঁইয়ে। ব্যবসার তালিকা ও বিজ্ঞাপনও একই ছায়ায়।
+            রক্ত, স্বাস্থ্য, চাকরি, শিক্ষা ও সংবাদ। বাংলা ভাষায় চলা জীবনের জন্য এক ঠাঁইয়ে। ব্যবসার তালিকা ও বিজ্ঞাপনও একই ছায়ায়।
           </p>
         </div>
         <div className="flex flex-wrap gap-x-5 gap-y-2 font-semibold text-foreground/90">

@@ -60,7 +60,7 @@ html.dark {
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
   --color-ring: var(--ring);
-  --font-sans: var(--font-noto-bengali), var(--font-geist-sans), system-ui, sans-serif;
+  --font-sans: var(--font-tiro-bangla), var(--font-noto-bengali), var(--font-geist-sans), system-ui, sans-serif;
   --font-mono: var(--font-geist-mono);
 }
 
@@ -100,7 +100,8 @@ body {
   margin: 0;
   background-color: transparent;
   color: inherit;
-  font-family: var(--font-noto-bengali), var(--font-geist-sans), system-ui, sans-serif;
+  font-family: var(--font-tiro-bangla), var(--font-noto-bengali), var(--font-geist-sans), system-ui, sans-serif;
+  word-spacing: 0.02em;
 }
 
 /* One continuous field behind routed content */
@@ -108,7 +109,6 @@ main {
   background-color: transparent;
 }
 
-/* Tiro Bangla via next/font variable on <html> — class only (no next/font className on nodes) for stable hydration */
 .font-tiro-bangla {
   font-family: var(--font-tiro-bangla), var(--font-noto-bengali), ui-serif, serif;
 }
@@ -118,5 +118,5 @@ a {
 }
 
 .leaflet-container {
-  font-family: var(--font-noto-bengali), var(--font-geist-sans), system-ui, sans-serif;
+  font-family: var(--font-tiro-bangla), var(--font-noto-bengali), var(--font-geist-sans), system-ui, sans-serif;
 }

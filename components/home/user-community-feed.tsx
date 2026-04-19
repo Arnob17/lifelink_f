@@ -83,7 +83,7 @@ function PostCard({
         )}
       </div>
       {post.title && (
-        <h3 className="mt-3 text-base font-bold leading-snug tracking-tight text-foreground sm:text-lg">{post.title}</h3>
+        <h3 className="mt-3 text-base font-bold leading-snug text-foreground sm:text-lg">{post.title}</h3>
       )}
       <div
         className={cn(
@@ -116,12 +116,12 @@ export function UserCommunityFeed({ initialPosts }: { initialPosts: UserFeedPost
         ? (localStorage.getItem(LIFELINK_TOKEN_STORAGE_KEY)?.trim() ?? "")
         : "");
     if (!accessToken) {
-      setError("সাইন ইন করুন — টোকেন পাওয়া যায়নি।");
+      setError("সাইন ইন করুন। টোকেন পাওয়া যায়নি।");
       return;
     }
     const body = content.trim();
     if (body.length === 0) {
-      setError("কিছু লিখুন — খালি পোস্ট পাঠানো যাবে না।");
+      setError("কিছু লিখুন, খালি পোস্ট পাঠানো যাবে না।");
       return;
     }
     setError(null);
@@ -179,7 +179,7 @@ export function UserCommunityFeed({ initialPosts }: { initialPosts: UserFeedPost
             <Input
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="শিরোনাম (ঐচ্ছিক) — রেডিট-স্টাইল"
+              placeholder="শিরোনাম (ঐচ্ছিক)"
               maxLength={200}
               disabled={sending}
               className="rounded-2xl"

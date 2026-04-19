@@ -50,7 +50,7 @@ export function LocationMapPreview({ initialMarkers = [] }: { initialMarkers?: M
         setCaption("মানচিত্র: আপনার বর্তমান অবস্থানের চারপাশে সেবাসমূহ।");
       },
       () => {
-        setCaption("মানচিত্র: অবস্থান পাওয়া যায়নি — ঢাকা কেন্দ্রিক ডেমো।");
+        setCaption("মানচিত্র: অবস্থান পাওয়া যায়নি। ঢাকা কেন্দ্রিক ডেমো।");
       },
       { enableHighAccuracy: false, maximumAge: 120_000, timeout: 12_000 },
     );

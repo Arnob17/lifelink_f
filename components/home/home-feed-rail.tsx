@@ -8,7 +8,6 @@ import {
   MapPin,
   MessagesSquare,
   Newspaper,
-  Sparkles,
   Waves,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -20,7 +19,6 @@ const links = [
   { id: "home-feed-lead", label: "সংবাদ", hint: "News", icon: Newspaper },
   { id: "home-feed-hub", label: "হাব", hint: "Hub", icon: Flame },
   { id: "home-feed-more", label: "আরও", hint: "More", icon: AlignLeft },
-  { id: "home-feed-ai", label: "AI", hint: "Preview", icon: Sparkles },
   { id: "home-feed-sidebar", label: "রেল", hint: "Rail", icon: MapPin },
 ] as const;
 

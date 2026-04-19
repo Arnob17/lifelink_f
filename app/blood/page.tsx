@@ -46,7 +46,7 @@ export default async function BloodPage({
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-red-700 dark:text-red-300">
           Emergency pathway
         </p>
-        <h1 className="mt-3 text-3xl font-semibold tracking-tight text-foreground">
+        <h1 className="mt-3 text-3xl font-semibold text-foreground">
           Find blood now
         </h1>
         <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
@@ -77,7 +77,7 @@ export default async function BloodPage({
         <div className="mt-4 grid gap-4 md:grid-cols-2">
           {donors.length === 0 && (
             <p className="text-sm text-muted-foreground">
-              No donors in range — widen the radius or start the seeded API.
+              No donors in range. Widen the radius or start the seeded API.
             </p>
           )}
           {donors.map((d) => (

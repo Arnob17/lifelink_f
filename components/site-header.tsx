@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { HeartPulse, Menu, X } from "lucide-react";
+import { HeartPulse, Menu, ShoppingCart, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -10,6 +10,7 @@ import { useAuth } from "@/components/providers/auth-context";
 import { ThemeToggle } from "@/components/theme-toggle";
 
 const nav = [
+  { href: "/essentials", label: "দোকান", hint: "Shop" },
   { href: "/news", label: "সংবাদ", hint: "News" },
   { href: "/map", label: "মানচিত্র", hint: "Map" },
   { href: "/jobs", label: "চাকরি", hint: "Jobs" },
@@ -31,7 +32,7 @@ export function SiteHeader() {
             <HeartPulse className="h-5 w-5" />
           </span>
           <span suppressHydrationWarning className="flex flex-col leading-tight">
-            <span className="font-tiro-bangla text-[1.12rem] font-semibold tracking-tight text-[var(--accent-ink)]">
+            <span className="font-tiro-bangla text-[1.12rem] font-semibold text-[var(--accent-ink)]">
               লাইফলিংক
             </span>
             <span className="text-[10px] font-medium tracking-[0.12em] text-muted-foreground">
@@ -66,11 +67,24 @@ export function SiteHeader() {
           </Button>
           {user ? (
             <>
+              <Button variant="ghost" size="icon" asChild>
+                <Link href="/essentials/cart" aria-label="Cart">
+                  <ShoppingCart className="h-4 w-4" />
+                </Link>
+              </Button>
               {user.role === "BUSINESS" && (
-                <Button variant="secondary" size="sm" asChild>
-                  <Link href="/dashboard/listings">বিজ্ঞাপন ড্যাশবোর্ড</Link>
-                </Button>
+                <>
+                  <Button variant="secondary" size="sm" asChild>
+                    <Link href="/dashboard/products">পণ্য ড্যাশবোর্ড</Link>
+                  </Button>
+                  <Button variant="outline" size="sm" asChild>
+                    <Link href="/dashboard/listings">বিজ্ঞাপন</Link>
+                  </Button>
+                </>
               )}
+              <Button variant="ghost" size="sm" asChild>
+                <Link href="/essentials/orders">অর্ডার</Link>
+              </Button>
               <Button variant="ghost" size="sm" onClick={logout}>
                 Sign out
               </Button>
@@ -123,14 +137,37 @@ export function SiteHeader() {
             </Link>
             {user ? (
               <>
+                <Link
+                  href="/essentials/cart"
+                  onClick={() => setOpen(false)}
+                  className="rounded-md px-3 py-2 text-sm font-semibold"
+                >
+                  🛒 কার্ট
+                </Link>
+                <Link
+                  href="/essentials/orders"
+                  onClick={() => setOpen(false)}
+                  className="rounded-md px-3 py-2 text-sm font-medium"
+                >
+                  অর্ডার
+                </Link>
                 {user.role === "BUSINESS" && (
-                  <Link
-                    href="/dashboard/listings"
-                    onClick={() => setOpen(false)}
-                    className="rounded-md px-3 py-2 text-sm font-medium"
-                  >
-                    বিজ্ঞাপন ড্যাশবোর্ড
-                  </Link>
+                  <>
+                    <Link
+                      href="/dashboard/products"
+                      onClick={() => setOpen(false)}
+                      className="rounded-md px-3 py-2 text-sm font-medium"
+                    >
+                      পণ্য ড্যাশবোর্ড
+                    </Link>
+                    <Link
+                      href="/dashboard/listings"
+                      onClick={() => setOpen(false)}
+                      className="rounded-md px-3 py-2 text-sm font-medium"
+                    >
+                      বিজ্ঞাপন ড্যাশবোর্ড
+                    </Link>
+                  </>
                 )}
                 <button
                   type="button"

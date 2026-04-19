@@ -9,9 +9,9 @@ import { geistMono, geistSans, notoBengali, tiroBangla } from "@/lib/fonts";
 import { THEME_STORAGE_KEY } from "@/lib/theme-storage";
 
 export const metadata: Metadata = {
-  title: "লাইফলিংক — LifeLink | মানুষের সেবা এক ঠাঁইয়ে",
+  title: "লাইফলিংক · LifeLink | মানুষের সেবা এক ঠাঁইয়ে",
   description:
-    "রক্ত, ক্লিনিক, ফার্মেসি, চাকরি, শিক্ষক ও সংবাদ — বাংলা ভাষায় চলা পরিবার ও ব্যবসার জন্য এক জায়গায়।",
+    "রক্ত, ক্লিনিক, ফার্মেসি, চাকরি, শিক্ষক ও সংবাদ। বাংলা ভাষায় চলা পরিবার ও ব্যবসার জন্য এক জায়গায়।",
 };
 
 export default function RootLayout({

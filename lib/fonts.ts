@@ -6,7 +6,7 @@ export const notoBengali = Noto_Sans_Bengali({
   weight: ["400", "500", "600", "700", "800"],
 });
 
-/** Editorial / masthead Bangla — loaded as a CSS variable on `<html>`; use `.font-tiro-bangla` in CSS. */
+/** Primary Bangla typeface, loaded as a CSS variable on `<html>`. */
 export const tiroBangla = Tiro_Bangla({
   variable: "--font-tiro-bangla",
   subsets: ["bengali", "latin"],

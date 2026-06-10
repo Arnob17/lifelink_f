@@ -40,11 +40,11 @@ export default async function MapPage() {
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--bangla-green)]">
           লাইভ মানচিত্র
         </p>
-        <h1 className="mt-2 text-3xl font-bold tracking-tight text-foreground">
+        <h1 className="mt-2 text-3xl font-bold text-foreground">
           শহর ও সেবার মানচিত্র
         </h1>
         <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-          রক্ত লাল, ক্লিনিক নীল, ফার্মেসি সবুজ — মার্কারে ক্লিক করলে বিস্তারিত লিংক পাবেন।
+          রক্ত লাল, ক্লিনিক নীল, ফার্মেসি সবুজ। মার্কারে ক্লিক করলে বিস্তারিত লিংক পাবেন।
           ব্রাউজারে অবস্থান অনুমতি দিলে মানচিত্র আপনার আশেপাশে কেন্দ্রীভূত হবে।
         </p>
       </div>

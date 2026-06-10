@@ -17,19 +17,24 @@ const typeLabel: Record<Listing["type"], string> = {
 export function ListingCard({
   listing,
   className,
+  density = "default",
 }: {
   listing: Listing;
   className?: string;
+  density?: "default" | "compact";
 }) {
   const meta = listing.metadata as Record<string, unknown> | null | undefined;
   const blood =
     typeof meta?.bloodGroup === "string" ? meta.bloodGroup : undefined;
 
+  const compact = density === "compact";
+
   return (
     <Link
       href={`/listings/${listing.id}`}
       className={cn(
-        "group flex flex-col rounded-2xl border border-border bg-card p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md",
+        "group flex flex-col rounded-2xl border border-border/80 bg-card/95 shadow-sm backdrop-blur-sm transition hover:-translate-y-0.5 hover:border-[var(--bangla-green)]/25 hover:shadow-md",
+        compact ? "p-4" : "p-5",
         className,
       )}
     >
@@ -43,6 +48,7 @@ export function ListingCard({
                   ? "secondary"
                   : "outline"
             }
+            className={cn(compact && "text-[10px]")}
           >
             {typeLabel[listing.type]}
           </Badge>
@@ -54,13 +60,23 @@ export function ListingCard({
         </div>
         <ArrowUpRight className="h-4 w-4 text-muted-foreground transition group-hover:text-foreground" />
       </div>
-      <h3 className="mt-3 line-clamp-2 text-lg font-semibold tracking-tight text-card-foreground">
+      <h3
+        className={cn(
+          "mt-3 line-clamp-2 font-semibold tracking-tight text-card-foreground",
+          compact ? "text-sm leading-snug" : "text-lg",
+        )}
+      >
         {listing.title}
       </h3>
-      <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-muted-foreground">
+      <p
+        className={cn(
+          "mt-2 line-clamp-3 leading-relaxed text-muted-foreground",
+          compact ? "text-xs" : "text-sm",
+        )}
+      >
         {listing.description}
       </p>
-      <div className="mt-4 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+      <div className={cn("mt-4 flex flex-wrap items-center gap-2 text-xs text-muted-foreground", compact && "mt-3")}>
         {listing.address && <span className="line-clamp-1">{listing.address}</span>}
         {listing.distanceKm != null && (
           <span className="rounded-full bg-muted px-2 py-0.5 font-medium text-foreground">

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { HeartPulse, Menu, X } from "lucide-react";
+import { HeartPulse, Menu, ShoppingCart, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -10,6 +10,7 @@ import { useAuth } from "@/components/providers/auth-context";
 import { ThemeToggle } from "@/components/theme-toggle";
 
 const nav = [
+  { href: "/essentials", label: "দোকান", hint: "Shop" },
   { href: "/news", label: "সংবাদ", hint: "News" },
   { href: "/map", label: "মানচিত্র", hint: "Map" },
   { href: "/jobs", label: "চাকরি", hint: "Jobs" },
@@ -24,14 +25,14 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/60 bg-background/90 shadow-sm backdrop-blur-md supports-[backdrop-filter]:bg-background/75">
-      <div className="mx-auto flex h-[3.65rem] max-w-6xl items-center justify-between px-4 sm:px-6">
+    <header className="sticky top-0 z-50 border-b border-border/50 bg-background/85 shadow-sm backdrop-blur-xl supports-[backdrop-filter]:bg-background/70">
+      <div className="mx-auto flex h-[3.65rem] w-full max-w-[min(100%,100rem)] items-center justify-between px-4 sm:px-6">
         <Link href="/" className="flex items-center gap-2.5 font-semibold tracking-tight">
           <span className="flex h-10 w-10 items-center justify-center rounded-sm border border-[color-mix(in_oklab,var(--accent-ink)_18%,var(--border))] bg-card text-[var(--bangla-green-strong)] shadow-[inset_0_1px_0_0_color-mix(in_oklab,white_35%,transparent)] dark:text-[var(--bangla-green)]">
             <HeartPulse className="h-5 w-5" />
           </span>
           <span suppressHydrationWarning className="flex flex-col leading-tight">
-            <span className="font-tiro-bangla text-[1.12rem] font-semibold tracking-tight text-[var(--accent-ink)]">
+            <span className="font-tiro-bangla text-[1.12rem] font-semibold text-[var(--accent-ink)]">
               লাইফলিংক
             </span>
             <span className="text-[10px] font-medium tracking-[0.12em] text-muted-foreground">
@@ -40,15 +41,15 @@ export function SiteHeader() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-0.5 md:flex">
+        <nav className="hidden items-center gap-1 md:flex">
           {nav.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               className={cn(
-                "rounded-md px-2.5 py-2 text-sm font-semibold text-muted-foreground transition hover:bg-muted hover:text-foreground",
+                "rounded-full px-3 py-2 text-sm font-semibold text-muted-foreground transition hover:bg-muted/90 hover:text-foreground",
                 pathname === item.href &&
-                "bg-card text-foreground shadow-sm ring-1 ring-border/70",
+                  "bg-foreground text-background shadow-md ring-1 ring-border/40 dark:ring-border/60",
               )}
             >
               <span className="block leading-tight">{item.label}</span>
@@ -66,11 +67,24 @@ export function SiteHeader() {
           </Button>
           {user ? (
             <>
+              <Button variant="ghost" size="icon" asChild>
+                <Link href="/essentials/cart" aria-label="Cart">
+                  <ShoppingCart className="h-4 w-4" />
+                </Link>
+              </Button>
               {user.role === "BUSINESS" && (
-                <Button variant="secondary" size="sm" asChild>
-                  <Link href="/dashboard/listings">বিজ্ঞাপন ড্যাশবোর্ড</Link>
-                </Button>
+                <>
+                  <Button variant="secondary" size="sm" asChild>
+                    <Link href="/dashboard/products">পণ্য ড্যাশবোর্ড</Link>
+                  </Button>
+                  <Button variant="outline" size="sm" asChild>
+                    <Link href="/dashboard/listings">বিজ্ঞাপন</Link>
+                  </Button>
+                </>
               )}
+              <Button variant="ghost" size="sm" asChild>
+                <Link href="/essentials/orders">অর্ডার</Link>
+              </Button>
               <Button variant="ghost" size="sm" onClick={logout}>
                 Sign out
               </Button>
@@ -123,14 +137,37 @@ export function SiteHeader() {
             </Link>
             {user ? (
               <>
+                <Link
+                  href="/essentials/cart"
+                  onClick={() => setOpen(false)}
+                  className="rounded-md px-3 py-2 text-sm font-semibold"
+                >
+                  🛒 কার্ট
+                </Link>
+                <Link
+                  href="/essentials/orders"
+                  onClick={() => setOpen(false)}
+                  className="rounded-md px-3 py-2 text-sm font-medium"
+                >
+                  অর্ডার
+                </Link>
                 {user.role === "BUSINESS" && (
-                  <Link
-                    href="/dashboard/listings"
-                    onClick={() => setOpen(false)}
-                    className="rounded-md px-3 py-2 text-sm font-medium"
-                  >
-                    বিজ্ঞাপন ড্যাশবোর্ড
-                  </Link>
+                  <>
+                    <Link
+                      href="/dashboard/products"
+                      onClick={() => setOpen(false)}
+                      className="rounded-md px-3 py-2 text-sm font-medium"
+                    >
+                      পণ্য ড্যাশবোর্ড
+                    </Link>
+                    <Link
+                      href="/dashboard/listings"
+                      onClick={() => setOpen(false)}
+                      className="rounded-md px-3 py-2 text-sm font-medium"
+                    >
+                      বিজ্ঞাপন ড্যাশবোর্ড
+                    </Link>
+                  </>
                 )}
                 <button
                   type="button"

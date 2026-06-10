@@ -25,7 +25,7 @@ export default async function ListingDetailPage({ params }: PageProps) {
           <Badge variant="destructive">{meta.bloodGroup}</Badge>
         )}
       </div>
-      <h1 className="text-3xl font-semibold tracking-tight">{listing.title}</h1>
+      <h1 className="text-3xl font-semibold">{listing.title}</h1>
       <p className="text-sm leading-relaxed text-muted-foreground">
         {listing.description}
       </p>
@@ -39,7 +39,7 @@ export default async function ListingDetailPage({ params }: PageProps) {
           {listing.contactPhone && <p>Phone: {listing.contactPhone}</p>}
           {!listing.contactEmail && !listing.contactPhone && (
             <p className="text-muted-foreground">
-              Contact details on file — message through your LifeLink workspace
+              Contact details on file. Message through your LifeLink workspace
               (wire-up in a later iteration).
             </p>
           )}

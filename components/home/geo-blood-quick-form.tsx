@@ -11,7 +11,7 @@ const DHAKA_LNG = 90.412521;
 export function GeoBloodQuickForm() {
   const [lat, setLat] = useState(String(DHAKA_LAT));
   const [lng, setLng] = useState(String(DHAKA_LNG));
-  const [geoNote, setGeoNote] = useState("ঢাকা কেন্দ্রিক ডেমো অবস্থান — অনুমতি দিলে আপনার আসল অবস্থান ব্যবহার হবে।");
+  const [geoNote, setGeoNote] = useState("ঢাকা কেন্দ্রিক ডেমো অবস্থান। অনুমতি দিলে আপনার আসল অবস্থান ব্যবহার হবে।");
 
   useEffect(() => {
     if (!navigator.geolocation) return;
@@ -22,7 +22,7 @@ export function GeoBloodQuickForm() {
         setGeoNote("আপনার বর্তমান অবস্থান ব্যবহার করে খুঁজছি।");
       },
       () => {
-        setGeoNote("অবস্থান পাওয়া যায়নি — ঢাকা কেন্দ্রিক ডেমো অবস্থান ব্যবহার হচ্ছে।");
+        setGeoNote("অবস্থান পাওয়া যায়নি, তাই ঢাকা কেন্দ্রিক ডেমো অবস্থান ব্যবহার হচ্ছে।");
       },
       { enableHighAccuracy: false, maximumAge: 60_000, timeout: 12_000 },
     );

@@ -1,7 +1,7 @@
-import type { Listing } from "./types";
+import type { Listing, UserFeedPost, Product, ProductBrowseResult, CategoryCount } from "./types";
+import { getPublicApiBaseUrl } from "./api-base";
 
-const base = () =>
-  process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000/api";
+const base = () => getPublicApiBaseUrl();
 
 export async function apiGet<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(`${base()}${path}`, {
@@ -53,6 +53,17 @@ export async function apiGetMarkers(params: {
   >(`/map/markers?${q.toString()}`);
 }
 
+export async function apiGetFeedPosts(params?: {
+  take?: number;
+  skip?: number;
+}): Promise<UserFeedPost[]> {
+  const q = new URLSearchParams();
+  if (params?.take != null) q.set("take", String(params.take));
+  if (params?.skip != null) q.set("skip", String(params.skip));
+  const suffix = q.toString() ? `?${q}` : "";
+  return apiGet<UserFeedPost[]>(`/posts${suffix}`);
+}
+
 export async function apiBloodSearch(params: {
   lat: number;
   lng: number;
@@ -68,4 +79,25 @@ export async function apiBloodSearch(params: {
   return apiGet<{ donors: Listing[]; banks: Listing[] }>(
     `/blood/search?${q.toString()}`,
   );
+}
+
+// ─── Essential Things (E-Commerce) ─────────────────────────────
+
+export async function apiGetProducts(
+  search: Record<string, string | number | undefined>,
+): Promise<ProductBrowseResult> {
+  const q = new URLSearchParams();
+  for (const [k, v] of Object.entries(search)) {
+    if (v === undefined || v === "") continue;
+    q.set(k, String(v));
+  }
+  return apiGet<ProductBrowseResult>(`/products?${q.toString()}`);
+}
+
+export async function apiGetProduct(id: string): Promise<Product> {
+  return apiGet<Product>(`/products/${id}`, { next: { revalidate: 60 } });
+}
+
+export async function apiGetProductCategories(): Promise<CategoryCount[]> {
+  return apiGet<CategoryCount[]>("/products/categories");
 }

@@ -4,13 +4,14 @@ import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { AppProviders } from "@/components/providers/app-providers";
+import { SosPresence } from "@/components/sos/sos-presence";
 import { geistMono, geistSans, notoBengali, tiroBangla } from "@/lib/fonts";
 import { THEME_STORAGE_KEY } from "@/lib/theme-storage";
 
 export const metadata: Metadata = {
-  title: "লাইফলিংক — LifeLink | মানুষের সেবা এক ঠাঁইয়ে",
+  title: "লাইফলিংক · LifeLink | মানুষের সেবা এক ঠাঁইয়ে",
   description:
-    "রক্ত, ক্লিনিক, ফার্মেসি, চাকরি, শিক্ষক ও সংবাদ — বাংলা ভাষায় চলা পরিবার ও ব্যবসার জন্য এক জায়গায়।",
+    "রক্ত, ক্লিনিক, ফার্মেসি, চাকরি, শিক্ষক ও সংবাদ। বাংলা ভাষায় চলা পরিবার ও ব্যবসার জন্য এক জায়গায়।",
 };
 
 export default function RootLayout({
@@ -33,6 +34,7 @@ export default function RootLayout({
         <AppProviders>
           <div className="flex min-h-full flex-col">
             <SiteHeader />
+            <SosPresence />
             <main className="flex-1">{children}</main>
             <SiteFooter />
           </div>
